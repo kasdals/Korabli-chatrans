@@ -26,6 +26,18 @@ jobs:
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
 
+      # Calendar version "YY.M.0" from the build date: advances monthly,
+      # flips year automatically (26.10 -> 26.11 -> 27.1).
+      # Injected into the exe via APP_VERSION (clap version), falling back
+      # to Cargo.toml for local builds.
+      - name: Compute calendar version
+        shell: bash
+        run: |
+          ver="$(printf '%d.%d.0' "$((10#$(date +%y)))" "$((10#$(date +%m)))")"
+          echo "APP_VERSION=$ver" >> "$GITHUB_ENV"
+          echo "CALVER=$ver" >> "$GITHUB_ENV"
+          echo "calendar version: $ver"
+
       - name: Build GUI panel build (chatrans-gui.exe)
         run: cargo build --release -p chatrans --features gui --target-dir target/gui
 
@@ -35,7 +47,7 @@ jobs:
       - name: Package
         shell: pwsh
         run: |
-          $tag = if ($env:GITHUB_REF -like 'refs/tags/*') { $env:GITHUB_REF -replace 'refs/tags/', '' } else { 'dev' }
+          $tag = if ($env:GITHUB_REF -like 'refs/tags/*') { $env:GITHUB_REF -replace 'refs/tags/', '' } else { "v$($env:CALVER)" }
           New-Item -ItemType Directory -Force dist | Out-Null
           Copy-Item target/gui/release/chatrans.exe dist/chatrans-gui.exe
           Copy-Item target/console/release/chatrans.exe dist/chatrans-console.exe
