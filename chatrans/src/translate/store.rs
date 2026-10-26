@@ -1,13 +1,12 @@
-//! 配置与密钥的落盘（移植自雷达 addon 的 `TranslationStore.cs` + `Dpapi.cs`）。
+//! 配置与密钥的落盘。
 //!
 //! 目录沿用方案 C 约定：`%LOCALAPPDATA%\KorabliOne\`
 //!   · `translation.json` —— 非敏感项（协议 / base_url / 模型 / 目标语言…）
 //!   · `secrets.dat`      —— 整个 key 映射字典 DPAPI 加密后落盘，不出现明文
 //!
-//! **迁移兼容**：启动时若 KorabliOne 下没有配置，会去读雷达 addon 留在
-//! `%LOCALAPPDATA%\TomatoRadar\Addons\Translation\` 的旧文件。同一 Windows
-//! 用户下 DPAPI 解密无感 —— 用户的 key 不用重填。写盘一律"临时文件 + rename
-//! 替换"，坏配置隔离留证（`.broken-时间戳`），绝不拖垮宿主。
+//! 写盘一律"临时文件 + rename 替换"，坏配置隔离留证（`.broken-时间戳`），
+//! 绝不拖垮宿主。注意：`secrets.dat` 的 DPAPI 熵字符串是既有数据的历史
+//! 兼容面（见 dpapi::PROTECT_DESCRIPTION），不可更改，否则已存密钥无法解密。
 
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -165,13 +164,39 @@ pub struct TranslationConfig {
 
 impl Default for TranslationConfig {
     fn default() -> Self {
-        TranslationConfig {
+        let mut cfg = TranslationConfig {
             enabled: false,
             target_language: "zh".to_string(),
             // 默认翻译所有聊天频道（界面上的「翻译所有聊天」默认勾选）
             team_only: false,
             active_endpoint_id: String::new(),
             endpoints: Vec::new(),
+        };
+        cfg.ensure_defaults();
+        cfg
+    }
+}
+
+impl TranslationConfig {
+    /// 空白供应商卡片（第 `slot` 张；id 形如 `endpoint1`）。
+    /// 新用户打开设置时直接看到 API Key 表单，而不是只有「添加更多」按钮。
+    pub fn blank_endpoint(slot: usize) -> TranslationEndpoint {
+        TranslationEndpoint {
+            id: format!("endpoint{}", slot + 1),
+            name: format!("模型供应商 {}", slot + 1),
+            ..TranslationEndpoint::default()
+        }
+    }
+
+    /// 最小可用性兜底（幂等）：端点列表为空时补一张空白供应商卡片；
+    /// 生效供应商未指定时指向第一个端点。endpoints 非空时原样。
+    pub fn ensure_defaults(&mut self) {
+        if self.endpoints.is_empty() {
+            let ep = Self::blank_endpoint(0);
+            self.active_endpoint_id = ep.id.clone();
+            self.endpoints.push(ep);
+        } else if self.active_endpoint_id.is_empty() {
+            self.active_endpoint_id = self.endpoints[0].id.clone();
         }
     }
 }
@@ -333,23 +358,13 @@ impl TranslationStore {
         local_app_data().join("KorabliOne")
     }
 
-    /// 雷达 addon 的旧配置目录：`%LOCALAPPDATA%\TomatoRadar\Addons\Translation\`
-    /// （与雷达 `TranslationStore.DefaultDirectory` 一致）。
-    pub fn radar_directory() -> PathBuf {
-        local_app_data()
-            .join("TomatoRadar")
-            .join("Addons")
-            .join("Translation")
-    }
-
-    /// 从默认位置加载：优先 KorabliOne（方案 C 主目录，已迁移过就直接用），
-    /// 其次雷达旧目录（一次性迁移进来）。写盘永远只写 KorabliOne。
+    /// 从默认位置加载：只读 KorabliOne（`%LOCALAPPDATA%\KorabliOne\`）。
+    /// 写盘同目录。
     pub fn load() -> TranslationStore {
         let primary = Self::default_directory();
-        let radar = Self::radar_directory();
         Self::load_with(
-            &[primary.clone(), radar.clone()],
-            &[primary.clone(), radar],
+            &[primary.clone()],
+            &[primary.clone()],
             primary,
         )
     }
@@ -382,6 +397,10 @@ impl TranslationStore {
             }
             break;
         }
+
+        // 空端点兜底（幂等）：文件不存在 / 文件里删光了供应商，都保证
+        // 设置页至少有一张空白卡片可填（见 ensure_defaults 注释）。
+        config.ensure_defaults();
 
         let secrets = load_secrets_from(secrets_candidates);
 
@@ -621,10 +640,10 @@ mod tests {
         let _ = fs::remove_dir_all(&dir);
     }
 
-    /// 雷达落盘的真实形态（含 DisplayName / Active 死数据、PascalCase 协议）
-    /// 必须能被读进来 —— 这是"key 不用重填"迁移承诺的另一半。
+    /// 旧版落盘的真实形态（含 DisplayName / Active 死数据、PascalCase 协议）
+    /// 必须能被读进来 —— 配置 schema 的历史兼容承诺。
     #[test]
-    fn radar_json_with_dead_fields_parses() {
+    fn legacy_json_with_dead_fields_parses() {
         let json = r#"{
   "Enabled": true,
   "TargetLanguage": "zh",
@@ -653,54 +672,11 @@ mod tests {
     "DisplayName": "endpoint1"
   }
 }"#;
-        let config: TranslationConfig = serde_json::from_str(json).expect("must parse radar json");
+        let config: TranslationConfig = serde_json::from_str(json).expect("must parse legacy json");
         assert_eq!(config.endpoints.len(), 1);
         assert_eq!(config.endpoints[0].model, "deepseek-flash");
         assert_eq!(config.endpoints[0].timeout_seconds, 10);
         assert_eq!(config.active().map(|e| e.id.as_str()), Some("endpoint1"));
-    }
-
-    /// 迁移主流程：KorabliOne 为空 + 雷达旧目录有配置和 DPAPI 密文 →
-    /// 一次 load 全部读入，密钥直接可用（同一 Windows 用户解密无感）。
-    #[cfg(windows)]
-    #[test]
-    fn migration_reads_radar_config_and_dpapi_secrets() {
-        let primary = temp_dir("mig-primary");
-        let radar = temp_dir("mig-radar");
-
-        // 雷达旧目录：translation.json（带死数据）+ secrets.dat（DPAPI 密文）
-        fs::write(
-            radar.join("translation.json"),
-            r#"{"Enabled":true,"TargetLanguage":"zh","TeamOnly":true,"ActiveEndpointId":"ep-a","Endpoints":[{"Id":"ep-a","Protocol":"Anthropic","BaseUrl":"https://api.anthropic.com","Model":"claude-3-haiku","TimeoutSeconds":10,"Proxy":"","ExtraHeaders":{}}]}"#,
-        )
-        .unwrap();
-        let mut secrets = BTreeMap::new();
-        secrets.insert("ep:ep-a".to_string(), "sk-ant-migration-key-42".to_string());
-        let plain = serde_json::to_vec(&secrets).unwrap();
-        let cipher = dpapi::protect(&plain).expect("dpapi protect");
-        assert_ne!(cipher, plain, "密文必须不等于明文");
-        assert!(!plain.is_empty());
-        fs::write(radar.join("secrets.dat"), &cipher).unwrap();
-
-        // 候选：先 KorabliOne（空），再雷达目录
-        let store = TranslationStore::load_with(&[primary.clone(), radar.clone()],
-                                               &[primary.clone(), radar.clone()],
-                                               primary.clone());
-        assert_eq!(store.config().endpoints.len(), 1);
-        assert_eq!(store.config().endpoints[0].id, "ep-a");
-        assert_eq!(store.config().endpoints[0].protocol, WireProtocol::Anthropic);
-        assert!(store.has_secret("ep:ep-a"));
-        assert_eq!(store.get_secret("ep:ep-a"), Some("sk-ant-migration-key-42"));
-
-        // 迁移后回写：写进的是主目录（KorabliOne），雷达目录保持只读
-        let mut store = store;
-        store.save().expect("save after migration");
-        assert!(primary.join("translation.json").exists());
-        assert!(primary.join("secrets.dat").exists());
-        assert!(!radar.join("translation.json.tmp").exists());
-
-        let _ = fs::remove_dir_all(&primary);
-        let _ = fs::remove_dir_all(&radar);
     }
 
     /// DPAPI round-trip + 密文不含明文（R4 自测清单）。
@@ -740,7 +716,9 @@ mod tests {
         let dir = temp_dir("broken-json");
         fs::write(dir.join("translation.json"), "{{{ not json").unwrap();
         let store = TranslationStore::load_with(&[dir.clone()], &[dir.clone()], dir.clone());
-        assert_eq!(store.config().endpoints.len(), 0);
+        // 坏文件 → 默认配置 + 空端点兜底（恰好一张空白供应商卡片）
+        assert_eq!(store.config().endpoints.len(), 1);
+        assert_eq!(store.config().endpoints[0].id, "endpoint1");
         assert_eq!(store.config().enabled, false);
         let quarantined: Vec<_> = fs::read_dir(&dir)
             .unwrap()
@@ -753,7 +731,7 @@ mod tests {
     }
 
     #[test]
-    fn secret_key_matches_radar() {
+    fn secret_key_format() {
         assert_eq!(secret_key("endpoint1"), "ep:endpoint1");
         assert_eq!(secret_key(""), "ep:default");
         assert_eq!(secret_key("  "), "ep:default");
@@ -770,32 +748,51 @@ mod tests {
         assert!(!store.has_secret("ep:a"));
     }
 
-    /// 真实环境冒烟（默认不跑，**只读不写**）：
-    ///   cargo test --release -p chatrans --lib -- --ignored real_radar_config_smoke
-    /// 读 `%LOCALAPPDATA%\TomatoRadar\Addons\Translation\` 下雷达留下的真实
-    /// 配置与 DPAPI 密文，验证同一 Windows 用户下 json 解析 + 解密全部成功。
-    /// 只断言"读到了"，绝不打印任何密钥内容。
-    #[cfg(windows)]
+    /// 默认配置预置一张空白供应商卡片：新用户打开设置直接看到
+    /// API Key 表单（而不是只有「添加更多」按钮）。
     #[test]
-    #[ignore]
-    fn real_radar_config_smoke() {
-        let radar = TranslationStore::radar_directory();
-        let store = TranslationStore::load_with(&[radar.clone()], &[radar.clone()], radar);
-        assert!(
-            !store.config().endpoints.is_empty(),
-            "真实雷达配置里应有供应商"
-        );
-        let active = store.config().active().expect("应有生效供应商");
-        let key = store
-            .get_secret(&active.secret_key())
-            .expect("真实 DPAPI 密文应能在同一 Windows 用户下解密");
-        assert!(!key.is_empty());
-        println!(
-            "[smoke] endpoints={} active_id={} key_len={} chars (内容不打印)",
-            store.config().endpoints.len(),
-            active.id,
-            key.chars().count()
-        );
+    fn default_config_has_one_blank_endpoint() {
+        let cfg = TranslationConfig::default();
+        assert_eq!(cfg.endpoints.len(), 1);
+        assert_eq!(cfg.endpoints[0].id, "endpoint1");
+        assert_eq!(cfg.endpoints[0].name, "模型供应商 1");
+        assert!(cfg.endpoints[0].base_url.is_empty());
+        assert!(cfg.endpoints[0].model.is_empty());
+        assert!(cfg.endpoints[0].enabled);
+        assert_eq!(cfg.active_endpoint_id, "endpoint1");
+    }
+
+    /// load 兜底：文件里把供应商删光（endpoints 空数组）→ 补一张空白卡；
+    /// 幂等 —— 已有端点时原样保留。
+    #[test]
+    fn load_empty_endpoints_gets_blank_fallback() {
+        let dir = temp_dir("blank-fallback");
+        fs::write(
+            dir.join("translation.json"),
+            r#"{"Enabled":false,"TargetLanguage":"zh","TeamOnly":false,"ActiveEndpointId":"","Endpoints":[]}"#,
+        )
+        .unwrap();
+        let store = TranslationStore::load_with(&[dir.clone()], &[dir.clone()], dir.clone());
+        assert_eq!(store.config().endpoints.len(), 1);
+        assert_eq!(store.config().endpoints[0].id, "endpoint1");
+        assert_eq!(store.config().active_endpoint_id, "endpoint1");
+        let _ = fs::remove_dir_all(&dir);
+    }
+
+    /// load 兜底幂等：文件里已有 N 个端点时原样（不重复插入空白卡）。
+    #[test]
+    fn load_preserves_existing_endpoints() {
+        let dir = temp_dir("blank-preserves");
+        fs::write(
+            dir.join("translation.json"),
+            r#"{"Enabled":true,"TargetLanguage":"zh","TeamOnly":false,"ActiveEndpointId":"ep-a","Endpoints":[{"Id":"ep-a","Protocol":"Anthropic","BaseUrl":"https://api.anthropic.com","Model":"claude-3-haiku","TimeoutSeconds":10,"Proxy":"","ExtraHeaders":{}}]}"#,
+        )
+        .unwrap();
+        let store = TranslationStore::load_with(&[dir.clone()], &[dir.clone()], dir.clone());
+        assert_eq!(store.config().endpoints.len(), 1);
+        assert_eq!(store.config().endpoints[0].id, "ep-a");
+        assert_eq!(store.config().active_endpoint_id, "ep-a");
+        let _ = fs::remove_dir_all(&dir);
     }
 
     /// S5 Models 字段：round-trip 不丢字段；PascalCase 落盘形态正确。
@@ -820,10 +817,10 @@ mod tests {
         assert_eq!(parsed.effective_model(), Some("m-b".to_string()));
     }
 
-    /// 雷达旧文件（无 Models 字段）解析不受影响：models 空 →
+    /// 旧版文件（无 Models 字段）解析不受影响：models 空 →
     /// effective_model None → 模型区显示"自定义模型：{model}"，行为不变。
     #[test]
-    fn radar_json_without_models_field_parses() {
+    fn legacy_json_without_models_field_parses() {
         let json = r#"{"Id":"ep-old","Protocol":"OpenAi","BaseUrl":"https://x.com","Model":"old-model","TimeoutSeconds":10,"Proxy":"","ExtraHeaders":{}}"#;
         let ep: TranslationEndpoint = serde_json::from_str(json).expect("旧文件必须能解析");
         assert!(ep.models.is_empty());
@@ -863,7 +860,7 @@ mod tests {
     }
 
     /// 界面用词从「端点」改成「模型供应商」时，**配置 schema 一个字都不许动**：
-    /// 这几个 PascalCase 键名是 TomatoRadar 插件的既有 schema，改了老配置就废了。
+    /// 这几个 PascalCase 键名是既有 schema，改了老配置就废了。
     /// 谁要是把 Rust 字段跟着改名，这条测试会立刻红。
     #[test]
     fn config_schema_keys_are_frozen() {
@@ -905,7 +902,7 @@ mod tests {
                 "Protocol": "OpenAi",
                 "BaseUrl": "https://example.com/v1",
                 "Model": "m",
-                "DisplayName": "雷达时代的死数据"
+                "DisplayName": "旧版遗留数据"
             }]
         }"#;
         let parsed: TranslationConfig = serde_json::from_str(legacy).expect("旧配置要能读");

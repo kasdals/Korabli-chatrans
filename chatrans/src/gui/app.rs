@@ -1550,7 +1550,9 @@ mod tests {
             Arc::new(Mutex::new(TranslationStore::new_in(PathBuf::from("."))));
         {
             let guard = lock_or_recover(&store);
-            assert_eq!(guard.config().endpoints.len(), 0);
+            // new_in 走默认配置 → 恰好一张空白供应商卡片（空端点兜底）
+            assert_eq!(guard.config().endpoints.len(), 1);
+            assert_eq!(guard.config().endpoints[0].id, "endpoint1");
         }
         // 制造毒锁：持锁 panic
         {
@@ -1562,6 +1564,7 @@ mod tests {
         }
         // 中毒后依然能拿锁读数据（S5 风险 1 的规避姿势）
         let guard = lock_or_recover(&store);
-        assert_eq!(guard.config().endpoints.len(), 0);
+        assert_eq!(guard.config().endpoints.len(), 1);
+        assert_eq!(guard.config().endpoints[0].id, "endpoint1");
     }
 }

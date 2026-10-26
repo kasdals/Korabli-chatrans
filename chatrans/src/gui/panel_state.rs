@@ -206,7 +206,7 @@ mod tests {
     }
 
     #[test]
-    fn headline_matches_radar_format() {
+    fn headline_format() {
         let state = state_with_lines();
         let rows: Vec<_> = state.visible_rows();
         assert_eq!(rows[0].headline(), "[友] Alice·Minotaur: gg wp");
