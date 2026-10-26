@@ -1,0 +1,55 @@
+<root>
+
+	<BaseMethods>
+
+		<requestAuthPack>
+			<Exposed/>
+		</requestAuthPack>
+
+		<onEnterVoiceChatRoom>
+			<Args>
+				<voiceChatRoomID> INT64 </voiceChatRoomID>
+			</Args>
+		</onEnterVoiceChatRoom>
+
+		<onLeaveVoiceChatRoom/>
+
+		<receiveAuthData>
+			<Args>
+				<authData> BLOB </authData>
+			</Args>
+		</receiveAuthData>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<onEnterVoiceChatRoom>
+			<Args>
+				<voiceChatRoomID> INT64 </voiceChatRoomID>
+			</Args>
+		</onEnterVoiceChatRoom>
+
+		<onLeaveVoiceChatRoom/>
+
+		<receiveAuthData>
+			<Args>
+				<authData> BLOB </authData>
+			</Args>
+			<VariableLengthHeaderSize> 2 </VariableLengthHeaderSize>
+		</receiveAuthData>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<cell/>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

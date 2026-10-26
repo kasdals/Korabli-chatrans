@@ -1,0 +1,71 @@
+<root>
+
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<Properties>
+
+		<buoyancyCurrentState>
+            <Type> BUOYANCY_STATE </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentState>
+
+        <buoyancyRudderIndex>
+            <Type> UINT8 </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyRudderIndex>
+
+        <buoyancyCurrentWaterline>
+            <Type> FLOAT </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentWaterline>
+
+	</Properties>
+
+	<TempProperties>
+
+	    <canChangeBuoyancy/>
+	    <buoyancyStates/>
+	    <_availableStates/>
+	    <_currentStateIndex/>
+	    <buoyancySpeedCoef/>
+	    <_buoyancySpeedCoefficient/>
+	    <_isBuoyancyBlocked/>
+
+	    <buoyancyTargetWaterline/>
+
+	    <buoyancyMin/>
+		<buoyancyMax/>
+
+	    <buoyancyStateMin/>
+		<buoyancyStateMax/>
+
+	    <buoyancyReducerBorder/>
+
+		<buoyancyAutoStateMinSpeed/>
+
+		<_skipStopLineZone/>
+		<_isFakeTargetWaterline/>
+		<buoyancySpeedCoef/>
+
+		<blockedControls/>
+
+		<_batteryFixedStates/>
+		<_batterySpendingStates/>
+		<_withoutTeamVisionStates/>
+		<_blindStates/>
+		<_invisibleStates/>
+		<_zeroFloodProbabilityStates/>
+		<_zeroBurnProbabilityStates/>
+		<_outgoingPingsRemovalStates/>
+		<_incomingPingsRemovalStates/>
+
+	</TempProperties>
+
+	<CellMethods>
+	</CellMethods>
+
+</root>

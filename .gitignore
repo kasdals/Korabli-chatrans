@@ -1,0 +1,11 @@
+/target
+*~
+/versions/
+/test/
+/.vscode
+*.txt
+
+# local additions
+/.vs
+*.log
+*.ps1.bak

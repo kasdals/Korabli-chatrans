@@ -1,0 +1,313 @@
+<root>
+
+	<ClientMethods>
+
+		<receiveNavigationDebugData>
+			<Arg> ENTITY_ID </Arg>
+			<Arg> NAVIGATION_DEBUG_DATA </Arg>
+		</receiveNavigationDebugData>
+
+		<inviteBotToDynamicDivision>
+			<Arg>	STRING	</Arg>	<!-- bot name -->
+		</inviteBotToDynamicDivision>
+
+		<removeBotFromDynamicDivision>
+			<Args>
+				<botName>   STRING	</botName>
+			</Args>
+		</removeBotFromDynamicDivision>
+
+		<createDynamicDivisionOfBots>
+			<Args>
+				<botList> ARRAY <of> STRING </of> </botList>
+			</Args>
+		</createDynamicDivisionOfBots>
+
+		<changeDynamicDivisionOwnerToBot>
+			<Args>
+				<botName>   STRING	</botName>
+			</Args>
+		</changeDynamicDivisionOwnerToBot>
+
+		<reloadShipAndCrewParams>
+			<Args>
+				<shipParamsId> SHIP_ID </shipParamsId>
+				<crewParamsId> CREW_ID </crewParamsId>
+			</Args>
+		</reloadShipAndCrewParams>
+
+		<receiveDrawServerMines>
+			<Args>
+				<fieldID>FIELD_ID</fieldID>
+				<serverMinesInfo>ARRAY<of>MINE_INFO</of></serverMinesInfo>
+			</Args>
+		</receiveDrawServerMines>
+
+		<receiveReloadWeapons>
+		</receiveReloadWeapons>
+
+		<receiveSpawnedBotId>
+			<Args>
+				<vehicleId> ENTITY_ID </vehicleId>
+			</Args>
+		</receiveSpawnedBotId>
+
+		<addDrawerPrimitive>
+			<Args>
+				<devFlagIndex> DEV_FLAG_INDEX </devFlagIndex>
+				<drawerID> DEV_DRAWER_ID </drawerID>
+				<drawFunc> STRING </drawFunc>
+				<args> BLOB </args>
+				<timeout> FLOAT </timeout>
+			</Args>
+		</addDrawerPrimitive>
+
+		<clearDrawer>
+			<Args>
+				<devFlagIndex> DEV_FLAG_INDEX </devFlagIndex>
+				<drawerID> DEV_DRAWER_ID </drawerID>
+			</Args>
+		</clearDrawer>
+
+		<receiveServerSquadronDebugOptions>
+			<Args>
+				<serverSquadronDebugOptions> UINT16 </serverSquadronDebugOptions>
+			</Args>
+		</receiveServerSquadronDebugOptions>
+
+	</ClientMethods>
+
+	<CellMethods>
+
+		<switchIdealGunHack>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> UINT8 </Arg>
+		</switchIdealGunHack>
+
+		<switchIdealATBASelectedGunId>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> UINT8 </Arg>
+		</switchIdealATBASelectedGunId>
+
+		<switchCameraShootHack>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> BOOL </Arg>
+		</switchCameraShootHack>
+
+		<setFloatCellAppData>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> STRING </Arg> <!-- key -->
+			<Arg> FLOAT </Arg> <!-- value -->
+		</setFloatCellAppData>
+
+		<bot_spawnSplashAtShootPos>
+			<Exposed> OWN_CLIENT </Exposed>
+		</bot_spawnSplashAtShootPos>
+
+		<requestNavigationDebugData>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> ENTITY_ID </Arg>
+		</requestNavigationDebugData>
+
+		<killEntity>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<targetId> TARGET_ID </targetId>
+				<deathReasonId> DEATH_REASON_ID </deathReasonId>
+				<collisionPos> VECTOR3 </collisionPos>
+			</Args>
+		</killEntity>
+
+		<respawn>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<avatarId> ENTITY_ID </avatarId>
+			</Args>
+		</respawn>
+
+		<setVehicleMovementBlocked>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<vehicleId> ENTITY_ID </vehicleId>
+			</Args>
+		</setVehicleMovementBlocked>
+
+		<setPhysicParams>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> STRING </Arg> <!-- key -->
+			<Arg> FLOAT </Arg> <!-- value -->
+		</setPhysicParams>
+
+		<damageSquadron>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> INT8 </Arg>
+			<Arg> ARRAY <of> UINT8 </of> </Arg>
+			<Arg> FLOAT </Arg>
+		</damageSquadron>
+
+		<teleportSquadron>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> PLANE_ID </Arg>
+			<Arg> VECTOR3 </Arg>
+			<Arg> NULLABLE_FLOAT </Arg>
+		</teleportSquadron>
+
+		<setSquadronDebugOption>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<debugOption> UINT16 </debugOption>
+				<enabled> BOOL </enabled>
+			</Args>
+		</setSquadronDebugOption>
+
+		<respawnPlanes>
+			<Exposed> OWN_CLIENT </Exposed>
+		</respawnPlanes>
+
+		<spawnMinefield>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<position> VECTOR3 </position>
+				<paramsId> GAMEPARAMS_ID </paramsId>
+			</Args>
+		</spawnMinefield>
+
+		<reloadWeapons>
+			<Exposed> OWN_CLIENT </Exposed>
+		</reloadWeapons>
+
+		<setBlind>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> BOOL </Arg>
+		</setBlind>
+
+		<reloadShipParams>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Arg> STRING </Arg>
+		</reloadShipParams>
+
+		<shootFromArbitraryPos>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<weaponType> WEAPON_TYPE </weaponType>
+				<clientTargetPos> VECTOR3 </clientTargetPos>
+				<startPos> VECTOR3 </startPos>
+				<squadronIndex> SQUADRON_INDEX </squadronIndex>
+			</Args>
+		</shootFromArbitraryPos>
+
+		<updateWishCategories>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<entityId> ENTITY_ID </entityId>
+				<disabledWishCategories> ARRAY <of> AI_CATEGORY </of> </disabledWishCategories>
+			</Args>
+		</updateWishCategories>
+	
+		<forceRotateWeapons>
+			<Exposed> OWN_CLIENT </Exposed>
+			<Args>
+				<weaponType> UINT8 </weaponType>
+			</Args>
+		</forceRotateWeapons>
+
+		<enableCustomSinking>
+			<Exposed/>
+			<Args>
+				<deathSettings> GAMEPARAMS </deathSettings>
+				<params> SHIP_SINK_INFO </params>
+			</Args>
+		</enableCustomSinking>
+
+		<disableCustomSinking>
+			<Exposed/>
+		</disableCustomSinking>
+
+		<resurrect>
+			<Exposed/>
+			<Args>
+				<shipConfig> SHIP_CONFIG </shipConfig>
+				<position> VECTOR3 </position>
+				<yaw> FLOAT </yaw>
+				<resetComponentsInfo> RESET_COMPONENTS_INFO </resetComponentsInfo>
+				<initialSpeed> FLOAT </initialSpeed>
+				<wasAlive> BOOL </wasAlive>
+			</Args>
+		</resurrect>
+
+	</CellMethods>
+
+	<BaseMethods>
+
+		<earnAchievementInBattle>
+			<Arg> UINT32 </Arg>		<!--Battle achievement id-->
+			<Flags>	OWN_CLIENT </Flags>
+			<Exposed> OWN_CLIENT </Exposed>
+		</earnAchievementInBattle>
+
+		<spawnBot>
+			<Args>
+				<shipName> STRING </shipName>
+				<teamId> TEAM_ID </teamId>
+				<position> VECTOR3 </position>
+				<yaw> FLOAT </yaw>
+				<botName> STRING </botName>
+				<botRoles> ARRAY <of> STRING </of> </botRoles>
+				<aiParams> AI_PARAMS </aiParams>
+			</Args>
+			<Exposed> OWN_CLIENT </Exposed>
+		</spawnBot>
+
+		<inviteBotToDynamicDivision>
+			<Args>
+				<botName> STRING </botName>
+				<divisionId> PRE_BATTLE_ID </divisionId>
+			</Args>
+			<Exposed> OWN_CLIENT </Exposed>
+		</inviteBotToDynamicDivision>
+
+		<removeBotFromDynamicDivision>
+			<Args>
+				<botName> STRING </botName>
+				<divisionId> PRE_BATTLE_ID </divisionId>
+			</Args>
+			<Exposed> OWN_CLIENT </Exposed>
+		</removeBotFromDynamicDivision>
+
+		<changeDynamicDivisionOwnerToBot>
+			<Args>
+				<botName> STRING </botName>
+				<divisionId> PRE_BATTLE_ID </divisionId>
+			</Args>
+			<Exposed> OWN_CLIENT </Exposed>
+		</changeDynamicDivisionOwnerToBot>
+
+		<fillDynamicDivisionWithBots>
+			<Args>
+				<botList> ARRAY <of> STRING </of> </botList>
+				<divisionId> PRE_BATTLE_ID </divisionId>
+				<playersLimit> INT8 </playersLimit>
+			</Args>
+			<Exposed> OWN_CLIENT </Exposed>
+		</fillDynamicDivisionWithBots>
+
+		<sendNewOwnerBotToDynamicDivisionManager>
+			<Args>
+				<botID> PLAYER_ID </botID>
+				<divisionId> PRE_BATTLE_ID </divisionId>
+			</Args>
+		</sendNewOwnerBotToDynamicDivisionManager>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<client/>
+		<bot/>
+		<cell/>
+	</ofBWComponent>
+</root>

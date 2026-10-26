@@ -1,0 +1,17 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+	
+	<ClientMethods>
+	</ClientMethods>
+	
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

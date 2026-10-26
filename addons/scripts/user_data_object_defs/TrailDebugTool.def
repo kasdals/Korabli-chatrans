@@ -1,0 +1,18 @@
+<root>
+	<OptionsFlag>Enable</OptionsFlag>
+
+	<Domain>CLIENT</Domain>
+
+	<Properties>
+		<speed>
+			<Type>VECTOR2</Type>
+			<Editable>true</Editable>
+			<Default>30.0 40.0</Default>
+		</speed>
+		<radius>
+			<Type>FLOAT</Type>
+			<Editable>true</Editable>
+			<Default>20.0</Default>
+		</radius>
+	</Properties>
+</root>

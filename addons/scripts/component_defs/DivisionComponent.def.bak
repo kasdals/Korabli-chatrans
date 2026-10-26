@@ -1,0 +1,161 @@
+<root>
+
+	<Properties>
+		<_DivisionComponent__divisionMBox>
+			<Type> MAILBOX </Type>
+			<Flags> BASE </Flags>
+		</_DivisionComponent__divisionMBox>
+	</Properties>
+
+	<BaseMethods>
+
+		<start>
+			<Args>
+				<isSoft> BOOL </isSoft>
+			</Args>
+			<Exposed/>
+		</start>
+
+		<stop>
+			<Args>
+				<isSoft> BOOL </isSoft>
+			</Args>
+			<Exposed/>
+		</stop>
+
+		<kickPlayer>
+			<Args>
+				<playerID> ENTITY_ID </playerID>
+			</Args>
+			<Exposed/>
+		</kickPlayer>
+
+		<setReady>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+			</Args>
+			<Exposed/>
+		</setReady>
+
+		<sendInvite>
+			<Args>
+				<inviteeSPAID> DB_ID </inviteeSPAID>
+				<inviteType> INT8 </inviteType>
+			</Args>
+			<Exposed/>
+		</sendInvite>
+
+		<revokeInvite>
+			<Args>
+				<playerID> ENTITY_ID </playerID>
+			</Args>
+			<Exposed/>
+		</revokeInvite>
+
+		<quitPreBattle>
+			<Exposed/>
+		</quitPreBattle>
+
+		<changeOwner>
+			<Args>
+				<newOwnerID> ENTITY_ID </newOwnerID>
+			</Args>
+			<Exposed/>
+		</changeOwner>
+
+		<dismiss>
+			<Exposed/>
+		</dismiss>
+
+		<setSelectedQueueType>
+			<Args>
+				<selectedQueueType> QUEUE_TYPE </selectedQueueType>
+				<gameParamID> GAMEPARAMS_ID </gameParamID>
+			</Args>
+			<Exposed/>
+		</setSelectedQueueType>
+
+		<setIgnore>
+			<Exposed/>
+		</setIgnore>
+
+		<lock>
+			<Exposed/>
+		</lock>
+
+		<unlock>
+			<Exposed/>
+		</unlock>
+
+		<changeGrants>
+			<Args>
+				<grants> INT64 </grants>
+			</Args>
+		</changeGrants>
+
+		<syncPreBattleDef>
+			<Args>
+				<packedPreBattleDef> BLOB </packedPreBattleDef>
+			</Args>
+		</syncPreBattleDef>
+
+		<receiveChatMessage>
+			<Args>
+				<divisionID> ENTITY_ID </divisionID>
+				<senderID> ENTITY_ID </senderID>
+				<message> STRING </message>
+				<messageCreationTime> TIMESTAMP </messageCreationTime>
+			</Args>
+		</receiveChatMessage>
+
+		<sendMessageToPlayers>
+			<Args>
+				<message> STRING </message>
+			</Args>
+			<Exposed/>
+		</sendMessageToPlayers>
+
+		<receiveSelectedQueueType>
+			<Args>
+				<queueType> QUEUE_TYPE </queueType>
+				<battleTypeGameParamId> GAMEPARAMS_ID </battleTypeGameParamId>
+			</Args>
+		</receiveSelectedQueueType>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<syncPreBattleDef>
+			<Args>
+				<packedPreBattleDef> BLOB </packedPreBattleDef>
+			</Args>
+		</syncPreBattleDef>
+
+		<receiveChatMessage>
+			<Args>
+				<senderID> ENTITY_ID </senderID>
+				<message> STRING </message>
+				<messageCreationTime> TIMESTAMP </messageCreationTime>
+			</Args>
+		</receiveChatMessage>
+
+		<receiveSelectedQueueType>
+			<Args>
+				<queueType> QUEUE_TYPE </queueType>
+				<battleTypeGameParamId> GAMEPARAMS_ID </battleTypeGameParamId>
+			</Args>
+		</receiveSelectedQueueType>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<client/>
+		<bot/>
+	</ofBWComponent>
+</root>

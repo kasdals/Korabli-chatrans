@@ -1,0 +1,240 @@
+<root>
+
+	<Properties>
+		<_TrainingRoomComponent__trainingRoomMBox>
+			<Type> MAILBOX </Type>
+			<Flags> BASE </Flags>
+		</_TrainingRoomComponent__trainingRoomMBox>
+	</Properties>
+
+	<BaseMethods>
+
+		<restoreTrainingRoomProxy>
+			<Args>
+				<trainingRoom> MAILBOX </trainingRoom>
+				<updatedData> TRAINING_ROOM_UPDATED_DATA </updatedData>
+				<chatHistoryDefs> ARRAY <of> CHAT_MESSAGE_HISTORY_DEF </of> </chatHistoryDefs>
+				<isNewPlayer> BOOL </isNewPlayer>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+		</restoreTrainingRoomProxy>
+
+		<cleanTrainingRoomProxy>
+			<Args>
+				<trainingRoomID> ENTITY_ID </trainingRoomID>
+				<reasonToClean> UINT8 </reasonToClean>
+			</Args>
+		</cleanTrainingRoomProxy>
+
+		<streamUpdatedData>
+			<Args>
+				<updatedData> TRAINING_ROOM_UPDATED_DATA </updatedData>
+			</Args>
+		</streamUpdatedData>
+
+		<onCountdownStageChanged>
+			<Args>
+				<countdownInfo> TRAINING_ROOM_COUNTDOWN_INFO </countdownInfo>
+				<playerState> STATE </playerState>
+			</Args>
+		</onCountdownStageChanged>
+
+		<receiveChatMessage>
+			<Args>
+				<trainingRoomID> ENTITY_ID </trainingRoomID>
+				<senderID> PLAYER_ID </senderID>
+				<message> STRING </message>
+				<messageCreationTime> TIMESTAMP </messageCreationTime>
+			</Args>
+		</receiveChatMessage>
+
+		<startSession>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</startSession>
+
+		<cancelCountdown>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</cancelCountdown>
+
+		<removePlayer>
+			<Args>
+				<playerID> PLAYER_ID </playerID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</removePlayer>
+
+		<removeAllBotsFromTeam>
+			<Args>
+				<teamID> TEAM_ID </teamID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</removeAllBotsFromTeam>
+
+		<setInRoom>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</setInRoom>
+
+		<setReady>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</setReady>
+
+		<setIgnore>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</setIgnore>
+
+		<sendInvite>
+			<Args>
+				<inviteeDBID> DB_ID </inviteeDBID>
+				<teamID> TEAM_ID </teamID>
+			</Args>
+			<Exposed/>
+		</sendInvite>
+
+		<revokeInvite>
+			<Args>
+				<playerID> PLAYER_ID </playerID>
+			</Args>
+			<Exposed/>
+		</revokeInvite>
+
+		<leaveTrainingRoom>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</leaveTrainingRoom>
+
+		<setPlayerTeam>
+			<Args>
+				<playerID> PLAYER_ID </playerID>
+				<teamID> TEAM_ID </teamID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</setPlayerTeam>
+
+		<setBattleTeamsSpawnSwapped>
+			<Args>
+				<isBattleTeamsSpawnSwapped> BOOL </isBattleTeamsSpawnSwapped>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</setBattleTeamsSpawnSwapped>
+
+		<addBot>
+			<Args>
+				<botConfig> TRAINING_ROOM_BOT_CONFIG_DEF </botConfig>
+				<shipID> SHIP_ID </shipID>
+				<teamID> TEAM_ID </teamID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</addBot>
+
+		<fillWithBots>
+			<Args>
+				<botConfig> TRAINING_ROOM_BOT_CONFIG_DEF </botConfig>
+				<mirror> BOOL </mirror>
+				<teamID> TEAM_ID </teamID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</fillWithBots>
+
+		<setCommander>
+			<Args>
+				<playerID> PLAYER_ID </playerID>
+				<teamID> TEAM_ID </teamID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</setCommander>
+
+		<applyChanges>
+			<Args>
+				<trainingRoomProperties> TRAINING_ROOM_PROPERTIES </trainingRoomProperties>
+			</Args>
+			<Exposed/>
+		</applyChanges>
+
+		<sendMessageToPlayers>
+			<Args>
+				<message> STRING </message>
+			</Args>
+			<Exposed/>
+		</sendMessageToPlayers>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<cleanTrainingRoomProxy>
+			<Args>
+				<reasonToClean> UINT8 </reasonToClean>
+			</Args>
+		</cleanTrainingRoomProxy>
+
+		<onCountdownStageChanged>
+			<Args>
+				<countdownInfo> TRAINING_ROOM_COUNTDOWN_INFO </countdownInfo>
+				<playerState> STATE </playerState>
+			</Args>
+		</onCountdownStageChanged>
+
+		<receiveChatMessage>
+			<Args>
+				<senderID> PLAYER_ID </senderID>
+				<message> STRING </message>
+				<messageCreationTime> TIMESTAMP </messageCreationTime>
+			</Args>
+		</receiveChatMessage>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

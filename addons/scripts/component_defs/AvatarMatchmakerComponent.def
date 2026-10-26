@@ -1,0 +1,75 @@
+<root>
+
+	<Properties>
+	</Properties>
+
+	<BaseMethods>
+
+		<enterMatchmaker>
+			<Exposed/>
+		</enterMatchmaker>
+
+		<onEnter>
+			<Args>
+				<queueType> QUEUE_TYPE </queueType>
+				<shipID> SHIP_ID </shipID>
+				<description> PYTHON </description>
+			</Args>
+		</onEnter>
+
+		<leaveMatchmaker>
+			<Exposed/>
+		</leaveMatchmaker>
+
+		<onLeave>
+			<Args>
+				<reason> UINT8 </reason>
+			</Args>
+		</onLeave>
+
+		<onQueueInfoReceived>
+			<Args>
+				<queueType> GAMEPARAMS_ID </queueType>  <!-- QUEUE_TYPE (UINT16) or OPERATION_ID (GAMEPARAMS_ID/UINT32) -->
+				<queueInfo> PYTHON </queueInfo>
+			</Args>
+		</onQueueInfoReceived>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<onEnter>
+			<Args>
+				<queueType> QUEUE_TYPE </queueType>
+				<shipID> SHIP_ID </shipID>
+				<description> PYTHON </description>
+			</Args>
+		</onEnter>
+
+		<onLeave>
+			<Args>
+				<reason> UINT8 </reason>
+			</Args>
+		</onLeave>
+
+		<onQueueInfoReceived>
+			<Args>
+				<queueType> GAMEPARAMS_ID </queueType>  <!-- QUEUE_TYPE (UINT16) or OPERATION_ID (GAMEPARAMS_ID/UINT32) -->
+				<queueInfo> PYTHON </queueInfo>
+			</Args>
+		</onQueueInfoReceived>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+		<cell/>
+	</ofBWComponent>
+
+</root>

@@ -1,0 +1,20 @@
+<root>
+	<BaseMethods>
+
+		<onKicked>
+			<Args>
+				<reason> UINT8 </reason>
+			</Args>
+		</onKicked>
+
+		<onBattleSessionCreate>
+			<Args>
+				<battleInfo> PYTHON </battleInfo>
+			</Args>
+			<ReturnValues>
+				<resultCode> BOOL </resultCode>
+			</ReturnValues>
+		</onBattleSessionCreate>
+
+	</BaseMethods>
+</root>

@@ -1,0 +1,86 @@
+<root>
+
+	<Properties>
+		<_TournamentRoomInviteeComponent__roomsMBoxes>
+			<Type> ARRAY <of> MAILBOX </of> </Type>
+			<Flags> BASE </Flags>
+		</_TournamentRoomInviteeComponent__roomsMBoxes>
+	</Properties>
+
+	<BaseMethods>
+
+	<!-- server api -->
+
+		<receiveInvite>
+			<Args>
+				<roomMBox> MAILBOX </roomMBox>
+				<inviteDef> TOURNAMENT_ROOM_INVITE_DEF </inviteDef>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+				<inviteeDef> TOURNAMENT_ROOM_INVITEE_DEF </inviteeDef>
+			</ReturnValues>
+		</receiveInvite>
+
+		<updateInvite>
+			<Args>
+				<inviteDef> TOURNAMENT_ROOM_INVITE_DEF </inviteDef>
+			</Args>
+		</updateInvite>
+
+		<onBecomeNonInvitee>
+			<Args>
+				<roomWebID> TOURNAMENT_ROOM_WEB_ID </roomWebID>
+			</Args>
+		</onBecomeNonInvitee>
+
+	<!-- /server api -->
+	<!-- client api -->
+
+		<acceptInvitation>
+			<Args>
+				<roomWebID> TOURNAMENT_ROOM_WEB_ID </roomWebID>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</acceptInvitation>
+
+	<!-- /client api -->
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<receiveInvite>
+			<Args>
+				<inviteDef> TOURNAMENT_ROOM_INVITE_DEF </inviteDef>
+			</Args>
+		</receiveInvite>
+
+		<updateInvite>
+			<Args>
+				<inviteDef> TOURNAMENT_ROOM_INVITE_DEF </inviteDef>
+			</Args>
+		</updateInvite>
+
+		<onBecomeNonInvitee>
+			<Args>
+				<roomWebID> TOURNAMENT_ROOM_WEB_ID </roomWebID>
+			</Args>
+		</onBecomeNonInvitee>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

@@ -1,0 +1,42 @@
+<root>
+	<BaseMethods>
+		<chooseSide>
+			<Arg>INT8</Arg>
+			<Exposed/>
+		</chooseSide>
+		<finalScreenShown>
+			<Exposed/>
+		</finalScreenShown>
+
+	</BaseMethods>
+
+	<ClientMethods>
+		<onSideChosen>
+			<Arg>INT8</Arg>
+		</onSideChosen>
+		<onChangeDay>
+		</onChangeDay>
+	</ClientMethods>
+
+	<TempProperties>
+		<_VSEventComponent__eventPdata/>
+		<_VSEventComponent__tasksProgress/>
+		<_VSEventComponent__shouldRequestFinalStats/>
+		<_VSEventComponent__notRequestedPersonalTasksRates/>
+		<_VSEventComponent__notSyncTasksProgress/>
+		<_VSEventComponent__notSyncFinalStats/>
+		<_VSEventComponent__shouldReSyncOnStageChanged/>
+		<_VSEventComponent__shouldSyncTasksProgressOnPrimeChanged/>
+		<_VSEventComponent__isSubscribed/>
+	</TempProperties>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

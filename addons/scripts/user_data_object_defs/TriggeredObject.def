@@ -1,0 +1,10 @@
+<root>
+	<Domain>CLIENT</Domain>
+	<OptionsFlag>Enable</OptionsFlag>
+	<Properties>
+		<model>
+			<Type>STRING</Type>
+			<Editable>True</Editable>
+		</model>
+	</Properties>
+</root>

@@ -1,0 +1,85 @@
+<root>
+
+	<BaseMethods>
+		<getInitialDump>
+			<Exposed/>
+			<Args>
+				<sagaID> STRING </sagaID>
+			</Args>
+			<ReturnValues>
+				<fullElementDump> MSGPACK_BLOB </fullElementDump>
+			</ReturnValues>
+		</getInitialDump>
+
+		<getElementsDump>
+			<Exposed/>
+			<Args>
+				<sagaID> STRING </sagaID>
+				<elementIDs> ARRAY <of> STRING </of> </elementIDs>
+			</Args>
+			<ReturnValues>
+				<elements> MSGPACK_BLOB </elements>
+			</ReturnValues>
+		</getElementsDump>
+
+		<advance>
+			<Exposed/>
+			<Args>
+				<sagaID> STRING </sagaID>
+				<toID> STRING </toID>
+			</Args>
+			<ReturnValues>
+				<newElementType> UINT8 </newElementType>
+			</ReturnValues>
+		</advance>
+
+		<storeCurrentScene>
+			<Exposed/>
+			<Args>
+				<sagaID> STRING </sagaID>
+				<episodeID> STRING </episodeID>
+				<sceneIndex> UINT8 </sceneIndex>
+			</Args>
+			<ReturnValues>
+				<success> BOOL </success>
+			</ReturnValues>
+		</storeCurrentScene>
+
+		<claimRewards>
+			<Exposed/>
+			<Args>
+				<sagaID> STRING </sagaID>
+			</Args>
+			<ReturnValues>
+				<lastClaimedThreshold> INT16 </lastClaimedThreshold>
+			</ReturnValues>
+		</claimRewards>
+	</BaseMethods>
+
+	<ClientMethods>
+		<startSyncDelay/>
+
+		<receiveSagasUpdate>
+			<Args>
+				<sagaPreviewDumps> MSGPACK_BLOB </sagaPreviewDumps>
+			</Args>
+		</receiveSagasUpdate>
+
+		<receiveSagaEnded>
+			<Args>
+				<sagaID> STRING </sagaID>
+			</Args>
+		</receiveSagaEnded>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>
+

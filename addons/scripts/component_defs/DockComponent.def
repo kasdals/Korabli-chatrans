@@ -1,0 +1,19 @@
+<root>
+	<BaseMethods>
+		<requestAuthToken>
+			<Exposed/>
+			<Args>
+				<requester> UINT8 </requester>
+			</Args>
+		</requestAuthToken>
+	</BaseMethods>
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<client/>
+		<bot/>
+	</ofBWComponent>
+</root>

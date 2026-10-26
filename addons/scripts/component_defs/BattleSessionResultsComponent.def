@@ -1,0 +1,36 @@
+<root>
+	<BaseMethods>
+		<onNewBuildingSpawned>
+			<Args>
+				<buildingData> MSGPACK_BLOB </buildingData>
+			</Args>
+		</onNewBuildingSpawned>
+
+		<onNewBotSpawned>
+			<Args>
+				<botData> MSGPACK_BLOB </botData>
+			</Args>
+		</onNewBotSpawned>
+
+		<onPlayerBanned>
+			<Args>
+				<playerSPAID> DB_ID </playerSPAID>
+			</Args>
+		</onPlayerBanned>
+
+		<onPlayerResurrected>
+			<Args>
+				<playerDBID> DB_ID </playerDBID>
+				<shipConfig> SHIP_CONFIG </shipConfig>
+			</Args>
+		</onPlayerResurrected>
+	</BaseMethods>
+
+	<ofEntity>
+		<BattleSession/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+	</ofBWComponent>
+</root>

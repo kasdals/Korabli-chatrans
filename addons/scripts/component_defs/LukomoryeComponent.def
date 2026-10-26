@@ -1,0 +1,39 @@
+<root>
+	<BaseMethods>
+		<receiveOffer>
+			<Args>
+				<teamID> UINT8 </teamID>
+				<until> TIMESTAMP </until>
+			</Args>
+		</receiveOffer>
+
+		<acceptOffer>
+			<Exposed/>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+			</Args>
+		</acceptOffer>
+	</BaseMethods>
+
+	<ClientMethods>
+		<receiveOffer>
+			<Args>
+				<teamID> UINT8 </teamID>
+				<ships> ARRAY <of> SHIP_ID </of> </ships>
+				<until> TIMESTAMP </until>
+			</Args>
+		</receiveOffer>
+
+		<cancelOffer/>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

@@ -1,0 +1,57 @@
+<root>
+	<BaseMethods>
+		<requestShipMetrics>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+			</Args>
+			<ReturnValues>
+				<stats> MSGPACK_BLOB </stats>
+			</ReturnValues>
+			<Exposed/>
+		</requestShipMetrics>
+	</BaseMethods>
+
+	<ClientMethods>
+		<startSyncDelay/>
+
+		<receiveProgressUpdate>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+				<progressUpdate> MSGPACK_BLOB </progressUpdate>
+			</Args>
+		</receiveProgressUpdate>
+
+		<receiveFullUpdate>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+				<progress> MSGPACK_BLOB </progress>
+				<stats> MSGPACK_BLOB </stats>
+			</Args>
+		</receiveFullUpdate>
+
+		<receiveShipMetricUpdate>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+				<metric> STRING </metric>
+				<data> MSGPACK_BLOB </data>
+			</Args>
+		</receiveShipMetricUpdate>
+
+		<receiveAccountMetricUpdate>
+			<Args>
+				<metric> STRING </metric>
+				<data> MSGPACK_BLOB </data>
+			</Args>
+		</receiveAccountMetricUpdate>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

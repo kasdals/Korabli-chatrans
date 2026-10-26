@@ -1,0 +1,25 @@
+<root>
+	<BaseMethods>
+		<updateStats>
+			<Args>
+				<eventsPacked> BLOB </eventsPacked>
+			</Args>
+		</updateStats>
+	</BaseMethods>
+
+	<CellMethods>
+		<requestStats>
+			<ReturnValues>
+				<eventsPacked> BLOB </eventsPacked>
+				<statePacked> BLOB </statePacked>
+			</ReturnValues>
+		</requestStats>
+	</CellMethods>
+
+	<Properties>
+	</Properties>
+
+	<TempProperties>
+		<_StatsOwner__sendStatsVary/>
+	</TempProperties>
+</root>

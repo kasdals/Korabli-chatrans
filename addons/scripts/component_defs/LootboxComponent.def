@@ -1,0 +1,44 @@
+<root>
+
+	<BaseMethods>
+		<openLootbox>
+			<Exposed/>
+			<Args>
+				<lootboxType> GAMEPARAMS_ID </lootboxType>
+			</Args>
+			<ReturnValues>
+				<rewards> MSGPACK_BLOB </rewards>
+			</ReturnValues>
+		</openLootbox>
+
+		<openLootboxesByType>
+			<Exposed/>
+			<Args>
+				<lootboxType> GAMEPARAMS_ID </lootboxType>
+				<amount> UINT16 </amount>
+			</Args>
+			<ReturnValues>
+				<rewards> MSGPACK_BLOB </rewards>
+			</ReturnValues>
+		</openLootboxesByType>
+
+		<openLootboxes>
+			<Exposed/>
+		</openLootboxes>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onMassLootboxOpenFailed/>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>
+

@@ -1,0 +1,26 @@
+<root>
+	<ClientMethods>
+	</ClientMethods>
+
+	<BaseMethods>
+
+		<receivePostBattleSurveyResults>
+			<Args>
+				<surveyId>UINT32</surveyId>
+				<answers>ARRAY<of>UINT8</of></answers>
+			</Args>
+			<Exposed/>
+		</receivePostBattleSurveyResults>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

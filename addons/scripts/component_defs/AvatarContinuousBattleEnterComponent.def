@@ -1,0 +1,34 @@
+<root>
+
+	<BaseMethods>
+		<onGetExpandablesData>
+			<Args>
+				<warningMask> UINT32 </warningMask>
+				<deficitList> ARRAY <of> UINT32 </of> </deficitList>
+				<replaceList> ARRAY <of> UINT32 </of> </replaceList>
+			</Args>
+		</onGetExpandablesData>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onGetExpandablesData>
+			<Args>
+				<warningMask> UINT32 </warningMask>
+				<deficitList> ARRAY <of> UINT32 </of> </deficitList>
+				<replaceList> ARRAY <of> UINT32 </of> </replaceList>
+			</Args>
+		</onGetExpandablesData>
+	</ClientMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+		<cell/>
+	</ofBWComponent>
+
+</root>

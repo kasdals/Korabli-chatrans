@@ -1,0 +1,49 @@
+<root>
+
+	<Methods>
+
+		<createRoom>
+			<Args>
+				<roomInitialData> TOURNAMENT_ROOM_INITIAL_DATA </roomInitialData>
+			</Args>
+		</createRoom>
+
+		<scheduleRoomDestroy>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<destroyTimestamp> TIMESTAMP </destroyTimestamp>
+			</Args>
+		</scheduleRoomDestroy>
+
+		<startSessionInRoom>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<sessionID> TOURNAMENT_ROOM_SESSION_ID </sessionID>
+			</Args>
+		</startSessionInRoom>
+
+		<updateSessionsInRoom>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<sessionInfos> ARRAY <of> TOURNAMENT_ROOM_SESSION_INFO </of> </sessionInfos>
+			</Args>
+		</updateSessionsInRoom>
+
+		<cancelSessionInRoom>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<sessionID> TOURNAMENT_ROOM_SESSION_ID </sessionID>
+			</Args>
+		</cancelSessionInRoom>
+
+	</Methods>
+
+	<ofService>
+		<TournamentRoomsManager/>
+	</ofService>
+
+	<ofBWComponent>
+		<service/>
+	</ofBWComponent>
+
+</root>

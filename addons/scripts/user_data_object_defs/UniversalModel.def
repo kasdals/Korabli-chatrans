@@ -1,0 +1,18 @@
+<root>
+	<Domain> CLIENT </Domain>
+	<OptionsFlag> Enable </OptionsFlag>
+
+	<Properties>
+
+		<activeTag>
+			<Type hiddenInEditor = "True"> STRING </Type>
+			<Editable> True </Editable>
+		</activeTag>
+
+		<models>
+			<Type> ARRAY <of> TAG_TO_MODEL </of> </Type>
+			<Editable> True </Editable>
+		</models>
+
+	</Properties>
+</root>

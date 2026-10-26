@@ -1,0 +1,37 @@
+<root>
+	<BaseMethods>
+		<onFinalStatsShown>
+			<Exposed/>
+		</onFinalStatsShown>
+
+		<requestCellHistory>
+			<Exposed/>
+			<Args>
+				<sprintId> UINT8 </sprintId>
+				<shipType> STRING </shipType>
+				<nation> STRING </nation>
+			</Args>
+		</requestCellHistory>
+
+	</BaseMethods>
+
+	<ClientMethods>
+		<receiveEmptyDump/>
+
+		<updateSeasonProgress>
+			<Args>
+				<data> ZIPPED_PYTHON </data>
+			</Args>
+		</updateSeasonProgress>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

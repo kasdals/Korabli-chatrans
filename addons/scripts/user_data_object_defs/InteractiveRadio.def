@@ -1,0 +1,11 @@
+<root>
+	<Domain>CLIENT</Domain>
+	<OptionsFlag>Enable</OptionsFlag>
+	<Properties>
+		<model>
+			<Type>STRING</Type>
+			<Editable>True</Editable>
+			<Default>content/location/misc/decoration/LMD327_radio/LMD327_radio.model</Default>
+		</model>
+	</Properties>
+</root>

@@ -1,0 +1,63 @@
+<root>
+	<BaseMethods>
+		<makeEvaluation>
+			<Args>
+				<arenaUniqueID> DB_ID </arenaUniqueID>
+				<subjectDBID> DB_ID </subjectDBID>
+				<emojiPackID> GAMEPARAMS_ID </emojiPackID>
+				<emojiName> STRING </emojiName>
+			</Args>
+			<Exposed/>
+		</makeEvaluation>
+
+		<changeEvaluation>
+			<Args>
+				<arenaUniqueID> DB_ID </arenaUniqueID>
+				<subjectDBID> DB_ID </subjectDBID>
+				<emojiPackID> GAMEPARAMS_ID </emojiPackID>
+				<emojiName> STRING </emojiName>
+			</Args>
+			<Exposed/>
+		</changeEvaluation>
+
+		<removeEvaluation>
+			<Args>
+				<arenaUniqueID> DB_ID </arenaUniqueID>
+				<subjectDBID> DB_ID </subjectDBID>
+			</Args>
+			<Exposed/>
+		</removeEvaluation>
+
+		<setEvaluationCaused>
+			<Args>
+				<evaluatorDBID> DB_ID </evaluatorDBID>
+				<evaluationType> UINT8 </evaluationType>
+				<karmaModifier> UINT8 </karmaModifier>
+			</Args>
+			<ReturnValues><Arg> UINT8 </Arg></ReturnValues>
+		</setEvaluationCaused>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onEvaluationApplied>
+			<Args>
+				<arenaUniqueID> DB_ID </arenaUniqueID>
+				<evaluatorDBID> DB_ID </evaluatorDBID>
+				<subjectDBID> DB_ID </subjectDBID>
+				<emojiPackID> GAMEPARAMS_ID </emojiPackID>
+				<emojiName> STRING </emojiName>
+				<evaluationTime> UINT32 </evaluationTime>
+			</Args>
+		</onEvaluationApplied>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

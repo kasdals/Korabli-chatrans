@@ -1,0 +1,466 @@
+<root>
+
+	<ClientMethods>
+
+		<logConsole>
+			<Arg>STRING</Arg>
+		</logConsole>
+
+		<reloadShipAndCrewParams>
+			<Args>
+				<shipParamsId> SHIP_ID </shipParamsId>
+				<crewParamsId> CREW_ID </crewParamsId>
+			</Args>
+		</reloadShipAndCrewParams>
+
+	</ClientMethods>
+
+	<BaseMethods>
+
+		<setTestBattleParams>
+			<Exposed/>
+			<Arg> BLOB </Arg> <!-- packedParams -->
+		</setTestBattleParams>
+
+		<exportAccountToWeb>
+			<!-- full or plain export -->
+			<Arg> BOOL </Arg>
+			<Exposed/>
+		</exportAccountToWeb>
+
+		<resetAbuse>
+			<Exposed/>
+		</resetAbuse>
+
+		<resetAbuseRating>
+			<Exposed/>
+		</resetAbuseRating>
+
+		<resetRecidivism>
+			<Exposed/>
+		</resetRecidivism>
+
+		<setBattlesToClean>
+			<Exposed/>
+		</setBattlesToClean>
+
+		<resetBranchDrops>
+			<Exposed/>
+		</resetBranchDrops>
+
+		<!-- Dev Method for receives notification from LGNC Stub -->
+		<receiveExternalNotification>
+			<!-- code of notification see NotificationCenterStub.py gContents keys -->
+			<Arg> UINT16 </Arg>
+			<Exposed/>
+		</receiveExternalNotification>
+
+		<setAbuseStatus>
+			<Exposed/>
+			<Arg>UINT8</Arg>
+		</setAbuseStatus>
+
+		<setAbuseRecidivism>
+			<Exposed/>
+			<Arg> STRING </Arg>
+			<Arg> FLOAT </Arg>
+		</setAbuseRecidivism>
+
+		<setAbuseRating>
+			<Exposed/>
+			<Arg> FLOAT </Arg>
+		</setAbuseRating>
+
+		<inviteBotToDynamicDivision>
+			<Args>
+				<botDef>PLAYER_DEF</botDef>
+			</Args>
+			<ReturnValues>
+				<result> BOOL </result>
+			</ReturnValues>
+		</inviteBotToDynamicDivision>
+
+		<removeBotFromDynamicDivision>
+			<Args>
+				<botID> PLAYER_ID </botID>
+			</Args>
+			<ReturnValues>
+				<result> BOOL </result>
+			</ReturnValues>
+		</removeBotFromDynamicDivision>
+
+		<sendNewOwnerBotToDynamicDivisionManager>
+			<Args>
+				<botID>PLAYER_ID</botID>
+				<divisionId>PRE_BATTLE_ID</divisionId>
+			</Args>
+		</sendNewOwnerBotToDynamicDivisionManager>
+
+		<getRankedStars>
+			<Args>
+				<stars> INT8 </stars>
+			</Args>
+			<Exposed/>
+		</getRankedStars>
+
+		<resetRankedSeason>
+			<Args>
+			</Args>
+			<Exposed/>
+		</resetRankedSeason>
+
+		<finishRankedSprint>
+			<Args>
+			</Args>
+			<Exposed/>
+		</finishRankedSprint>
+
+		<finishRankedSeason>
+			<Args>
+			</Args>
+			<Exposed/>
+		</finishRankedSeason>
+
+		<setFakeBattlesResults>
+			<Args>
+				<result> INT8 </result>
+				<place> INT8 </place>
+				<isEconomicallyPunished> BOOL </isEconomicallyPunished>
+			</Args>
+			<Exposed/>
+		</setFakeBattlesResults>
+
+		<skipRankedLeague>
+			<Args>
+			</Args>
+			<Exposed/>
+		</skipRankedLeague>
+
+		<resetRankedLeague>
+			<Args>
+			</Args>
+			<Exposed/>
+		</resetRankedLeague>
+
+		<resetAchievements>
+			<Exposed/>
+		</resetAchievements>
+
+		<dropAchievementsEarnTime>
+			<Exposed/>
+		</dropAchievementsEarnTime>
+
+		<vseChangeStagePoints>
+			<!-- personal stage points  -->
+			<Arg> UINT32 </Arg>
+			 <Exposed/>
+		</vseChangeStagePoints>
+
+		<vseChangeDay>
+			 <Exposed/>
+		</vseChangeDay>
+
+		<vseUpdateTaskProgress>
+			<Exposed/>
+			<Args>
+				<taskId> STRING </taskId>
+				<progress> UINT32 </progress>
+			</Args>
+		</vseUpdateTaskProgress>
+
+		<shipacesChangeProgress>
+			<Exposed/>
+			<Args>
+				<shipId> SHIP_ID </shipId>
+				<taskProgress> ACES_TASK_PROGRESS </taskProgress>
+			</Args>
+		</shipacesChangeProgress>
+
+		<saAddPoints>
+			<Exposed/>
+			<Args>
+				<points> UINT16 </points>
+			</Args>
+		</saAddPoints>
+
+		<saChangeTask>
+			<Exposed/>
+		</saChangeTask>
+
+		<addBot>
+			<Args>
+				<botOrOwnerShipID>UINT32</botOrOwnerShipID>
+				<needToGenerateRandomShipId>BOOL</needToGenerateRandomShipId>
+			</Args>
+			<Exposed/>
+		</addBot>
+
+		<removeAllBots>
+			<Exposed/>
+		</removeAllBots>
+
+		<setBotsReady>
+			<Exposed/>
+		</setBotsReady>
+
+		<kickBot>
+			<Args>
+				<botId>PLAYER_ID</botId>
+			</Args>
+		</kickBot>
+
+		<changeBattlePassType>
+			<Exposed/>
+			<Args>
+				<newType> UINT8 </newType>
+			</Args>
+		</changeBattlePassType>
+
+		<setMasteryRank>
+			<Exposed/>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+				<masteryRank> UINT8 </masteryRank>
+			</Args>
+		</setMasteryRank>
+
+		<addMasteryPoints>
+			<Exposed/>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+				<masteryPointsToAdd> UINT64 </masteryPointsToAdd>
+			</Args>
+		</addMasteryPoints>
+
+		<doMasteryTasks>
+			<Exposed/>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+			</Args>
+		</doMasteryTasks>
+
+		<createTournamentRoom>
+			<Exposed/>
+			<Args>
+				<roomInitialData> TOURNAMENT_ROOM_INITIAL_DATA </roomInitialData>
+			</Args>
+		</createTournamentRoom>
+
+		<scheduleTournamentRoomDestroy>
+			<Exposed/>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<destroyTimestamp> TIMESTAMP </destroyTimestamp>
+			</Args>
+		</scheduleTournamentRoomDestroy>
+
+		<startSessionInTournamentRoom>
+			<Exposed/>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<sessionID> TOURNAMENT_ROOM_SESSION_ID </sessionID>
+			</Args>
+		</startSessionInTournamentRoom>
+
+		<updateSessionsInTournamentRoom>
+			<Exposed/>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<sessionInfos> ARRAY <of> TOURNAMENT_ROOM_SESSION_INFO </of> </sessionInfos>
+			</Args>
+		</updateSessionsInTournamentRoom>
+
+		<cancelSessionInTournamentRoom>
+			<Exposed/>
+			<Args>
+				<roomWebID> DB_ID </roomWebID>
+				<sessionID> TOURNAMENT_ROOM_SESSION_ID </sessionID>
+			</Args>
+		</cancelSessionInTournamentRoom>
+
+		<reloadShipAndCrewParams>
+			<Exposed/>
+			<Args>
+				<shipParamsId> SHIP_ID </shipParamsId>
+				<crewParamsId> CREW_ID </crewParamsId>
+			</Args>
+		</reloadShipAndCrewParams>
+
+		<resetRatingBattlesSeasonProgress>
+			<Exposed/>
+		</resetRatingBattlesSeasonProgress>
+
+		<performFakeRatingBattle>
+			<Exposed/>
+			<Args>
+				<result> INT8 </result>
+				<exp> UINT16 </exp>
+				<isAbuse> BOOL </isAbuse>
+			</Args>
+		</performFakeRatingBattle>
+
+		<resetTrialsProgress>
+			<Exposed/>
+		</resetTrialsProgress>
+
+		<setReferralInfo>
+			<Exposed/>
+			<Args>
+				<referrerID> DB_ID </referrerID>
+				<referrerJoinTimestamp> TIMESTAMP </referrerJoinTimestamp>
+				<recruitID> DB_ID </recruitID>
+				<recruitJoinTiemstamp> TIMESTAMP </recruitJoinTiemstamp>
+			</Args>
+		</setReferralInfo>
+
+		<addWaffentragerProgressPoints>
+			<Exposed/>
+			<Args>
+				<progressPointsDiff> UINT32 </progressPointsDiff>
+			</Args>
+		</addWaffentragerProgressPoints>
+
+		<changeWaffentragerActivationKeys>
+			<Exposed/>
+			<Args>
+				<activationKeysDiff> INT32 </activationKeysDiff>
+			</Args>
+		</changeWaffentragerActivationKeys>
+
+		<setDevCountdownTime>
+			<Exposed/>
+			<Args>
+				<countdownTime> UINT16 </countdownTime>
+			</Args>
+		</setDevCountdownTime>
+
+		<resetDevCountdownTime>
+			<Exposed/>
+		</resetDevCountdownTime>
+
+		<changeRareCrewBooks>
+			<Exposed/>
+			<Args>
+				<rareCrewBooksDiff> INT32 </rareCrewBooksDiff>
+			</Args>
+		</changeRareCrewBooks>
+
+		<campaignsCompleteTask>
+			<Args>
+				<taskID>STRING</taskID>
+			</Args>
+			<Exposed/>
+		</campaignsCompleteTask>
+
+		<campaignsAddMissionStars>
+			<Args>
+				<missionID>STRING</missionID>
+				<count>UINT8</count>
+			</Args>
+			<Exposed/>
+		</campaignsAddMissionStars>
+
+		<campaignsUnlockMission>
+			<Args>
+				<missionID>STRING</missionID>
+			</Args>
+			<Exposed/>
+		</campaignsUnlockMission>
+
+		<campaignsCompleteMission>
+			<Args>
+				<missionID>STRING</missionID>
+			</Args>
+			<Exposed/>
+		</campaignsCompleteMission>
+
+		<campaignsResetProgress>
+			<Exposed/>
+		</campaignsResetProgress>
+
+		<destroyAccount>
+		</destroyAccount>
+
+		<resetAchievements>
+			<Exposed/>
+		</resetAchievements>
+
+		<earnAchievement>
+			<Exposed/>
+			<Args>
+				<achievementNameOrId> UINT32 </achievementNameOrId>
+			</Args>
+		</earnAchievement>
+
+		<dropAchievementsEarnTime>
+			<Exposed/>
+		</dropAchievementsEarnTime>
+
+		<achievementsEarnFakePercentage>
+			<Exposed/>
+			<Args>
+				<activePlayersAmount> UINT32 </activePlayersAmount>
+				<earnAchievementChance> FLOAT </earnAchievementChance>
+			</Args>
+		</achievementsEarnFakePercentage>
+
+		<achievementsEarnUpdatePercentage>
+			<Exposed/>
+		</achievementsEarnUpdatePercentage>
+
+		<achievementsEarnMakePlayerActive>
+			<Exposed/>
+			<Args>
+				<spaID> DB_ID </spaID>
+			</Args>
+		</achievementsEarnMakePlayerActive>
+
+		<achievementsEarnMakePlayerInactive>
+			<Exposed/>
+			<Args>
+				<spaID> DB_ID </spaID>
+			</Args>
+		</achievementsEarnMakePlayerInactive>
+
+		<achievementsEarnMakeMeActive>
+			<Exposed/>
+		</achievementsEarnMakeMeActive>
+
+		<achievementsEarnMakeMeInactive>
+			<Exposed/>
+		</achievementsEarnMakeMeInactive>
+
+		<achievementsEarnDropPercentage>
+			<Exposed/>
+		</achievementsEarnDropPercentage>
+
+		<addMetaEventProgressPoints>
+			<Exposed/>
+			<Args>
+				<count> UINT32 </count>
+			</Args>
+		</addMetaEventProgressPoints>
+
+		<sagasCompleteJourney>
+			<Exposed/>
+			<Args>
+				<sagaID> STRING </sagaID>
+			</Args>
+		</sagasCompleteJourney>
+
+		<completeNextSagasTask>
+			<Exposed/>
+		</completeNextSagasTask>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

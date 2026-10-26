@@ -1,0 +1,82 @@
+<root>
+
+	<ClientMethods>
+
+		<onGetClanBattlesStage>
+			<Args>
+				<seasonID> UINT32 </seasonID>
+				<seasonType> STRING </seasonType>
+				<stage> UINT8 </stage>
+			</Args>
+		</onGetClanBattlesStage>
+
+		<onAccountRemovedFromClan>
+			<Args>
+				<clanID> DB_ID </clanID>
+			</Args>
+		</onAccountRemovedFromClan>
+
+		<onAccountAddedToClan>
+			<Args>
+				<clanID> DB_ID </clanID>
+			</Args>
+		</onAccountAddedToClan>
+
+		<onClansDisabled>
+		</onClansDisabled>
+
+	</ClientMethods>
+
+	<BaseMethods>
+
+		<syncClanInfo>
+			<Exposed/>
+		</syncClanInfo>
+
+		<sendInvite>
+			<Args>
+				<inviteeDBID> DB_ID </inviteeDBID>
+			</Args>
+			<Exposed/>
+		</sendInvite>
+
+		<setClanSquad>
+			<Args>
+				<newSquadId>INT64</newSquadId>
+			</Args>
+			<Exposed/>
+		</setClanSquad>
+
+		<sendMessageOfTheDay>
+			<Args>
+				<message>UNICODE_STRING</message>
+			</Args>
+			<Exposed/>
+		</sendMessageOfTheDay>
+
+		<sendPrimeTime>
+			<Args>
+				<primeTimeId>INT64</primeTimeId>
+			</Args>
+			<Exposed/>
+		</sendPrimeTime>
+
+		<sendPlannedPrimeTime>
+			<Args>
+				<primeTimeId>INT64</primeTimeId>
+			</Args>
+			<Exposed/>
+		</sendPlannedPrimeTime>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

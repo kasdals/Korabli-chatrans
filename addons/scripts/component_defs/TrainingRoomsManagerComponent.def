@@ -1,0 +1,49 @@
+<root>
+	<BaseMethods>
+		<createTrainingRoom>
+			<Args>
+				<trainingRoomProperties> TRAINING_ROOM_PROPERTIES </trainingRoomProperties>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</createTrainingRoom>
+
+		<getTrainingRoomsList>
+			<Args>
+				<onlineFriends> ARRAY <of> DB_ID </of></onlineFriends>
+				<ownerNameContains> UNICODE_STRING </ownerNameContains>
+			</Args>
+			<Exposed/>
+		</getTrainingRoomsList>
+
+		<joinTrainingRoom>
+			<Args>
+				<trainingRoomID> ENTITY_ID </trainingRoomID>
+				<password> UNICODE_STRING </password>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+			<Exposed/>
+		</joinTrainingRoom>
+
+		<rejectInvite>
+			<Args>
+				<trainingRoomID> ENTITY_ID </trainingRoomID>
+			</Args>
+			<Exposed/>
+		</rejectInvite>
+	</BaseMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

@@ -1,0 +1,88 @@
+<root>
+
+	<BaseMethods>
+
+		<addBan>
+			<Args>
+				<cmdCode> INT8 </cmdCode>
+				<duration> INT32 </duration>
+				<targetSpaID> DB_ID </targetSpaID>
+				<nickName> UNICODE_STRING </nickName>
+				<reason> UNICODE_STRING </reason>
+				<channelID> UNICODE_STRING </channelID>
+				<component> UNICODE_STRING </component>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</addBan>
+
+		<removeBan>
+			<Args>
+				<cmdCode> INT8 </cmdCode>
+				<targetSpaID> DB_ID </targetSpaID>
+				<nickName> UNICODE_STRING </nickName>
+				<channelID> UNICODE_STRING </channelID>
+				<component> UNICODE_STRING </component>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</removeBan>
+
+		<requestAuthToken>
+			<Exposed/>
+		</requestAuthToken>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<onXMPPSettingsUpdate>
+			<Args>
+				<chatBlocked> BOOL </chatBlocked>
+				<battleChatBlocked> BOOL </battleChatBlocked>
+				<prebattleChatBlocked> BOOL </prebattleChatBlocked>
+				<desriptionFieldsBlocked> BOOL </desriptionFieldsBlocked>
+			</Args>
+		</onXMPPSettingsUpdate>
+
+		<receiveAuthToken>
+			<Args>
+				<spaID> DB_ID </spaID>
+				<token> AUTH_TOKEN </token>
+			</Args>
+		</receiveAuthToken>
+
+		<onChatMessageBanChat>
+			<Args>
+				<channelID> STRING </channelID>
+				<extraData> CHAT_SYSTEM_MESSAGE_BAN </extraData>
+			</Args>
+		</onChatMessageBanChat>
+
+		<onChatMessageSystemDuty>
+			<Args>
+				<channelId>STRING</channelId>
+				<messageType>UINT8</messageType>
+				<msg>STRING</msg>
+				<messageCreationTime>UINT32</messageCreationTime>
+			</Args>
+		</onChatMessageSystemDuty>
+
+		
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

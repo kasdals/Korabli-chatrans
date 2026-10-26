@@ -1,0 +1,42 @@
+<root>
+	<BaseMethods>
+		<makeEvaluation>
+			<Args>
+				<subjectDBID> DB_ID </subjectDBID>
+				<emojiPackID> GAMEPARAMS_ID </emojiPackID>
+				<emojiName> STRING </emojiName>
+			</Args>
+			<Exposed/>
+		</makeEvaluation>
+
+		<changeEvaluation>
+			<Args>
+				<subjectDBID> DB_ID </subjectDBID>
+				<emojiPackID> GAMEPARAMS_ID </emojiPackID>
+				<emojiName> STRING </emojiName>
+			</Args>
+			<Exposed/>
+		</changeEvaluation>
+
+		<removeEvaluation>
+			<Args>
+				<subjectDBID> DB_ID </subjectDBID>
+			</Args>
+			<Exposed/>
+		</removeEvaluation>
+	</BaseMethods>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<cell/>
+		<client/>
+	</ofBWComponent>
+</root>

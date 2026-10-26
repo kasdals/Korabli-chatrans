@@ -1,0 +1,89 @@
+<root>
+
+	<Methods>
+
+		<loadAccount>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+				<loadArgs> ACCOUNT_LOAD_ARGS_DEF </loadArgs>
+			</Args>
+			<ReturnValues>
+				<account> MAILBOX </account>
+			</ReturnValues>
+		</loadAccount>
+
+		<loadAccountController>
+			<Args>
+				<accountControllerDBID> DB_ID </accountControllerDBID>
+				<loadArgs> ACCOUNT_LOAD_ARGS_DEF </loadArgs>
+			</Args>
+			<ReturnValues>
+				<account> MAILBOX </account>\
+			</ReturnValues>
+		</loadAccountController>
+
+		<storeAccountControllerInfo>
+			<Args>
+				<accountController> MAILBOX </accountController>
+				<accountLoadReason> UINT8 </accountLoadReason>
+				<accountDBID> DB_ID </accountDBID>
+				<masterID> MASTER_ID </masterID>
+			</Args>
+		</storeAccountControllerInfo>
+
+		<removeAccountControllerInfo>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+			</Args>
+		</removeAccountControllerInfo>
+
+		<onMasterChangeStarted>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+				<accountController> MAILBOX </accountController>
+			</Args>
+			<ReturnValues>
+				<masterId> MASTER_ID </masterId>
+				<masterService> MAILBOX </masterService>
+			</ReturnValues>
+		</onMasterChangeStarted>
+
+		<removeGdprDataOnMasters>
+			<Args>
+				<accountController> MAILBOX </accountController>
+				<accountDBID> DB_ID </accountDBID>
+				<clearPersistentProperties> MSGPACK_BLOB </clearPersistentProperties>
+			</Args>
+			<ReturnValues>
+				<errorCode> UINT8 </errorCode>
+			</ReturnValues>
+		</removeGdprDataOnMasters>
+
+		<subscribeForLoadAccounts>
+			<Args>
+				<accountDBIDs> ARRAY <of> DB_ID </of> </accountDBIDs>
+				<subscriberMBox> MAILBOX </subscriberMBox>
+			</Args>
+			<ReturnValues>
+				<result> UINT8 </result>
+			</ReturnValues>
+		</subscribeForLoadAccounts>
+
+		<updateSubscriptionsForLoadAccounts>
+			<Args>
+				<updatedAppSubscriptions> ARRAY <of> ACCOUNT_LOAD_SUBSCRIPTION_UPDATE_DEF </of> </updatedAppSubscriptions>
+				<subscriberApp> MAILBOX </subscriberApp>
+			</Args>
+		</updateSubscriptionsForLoadAccounts>
+
+	</Methods>
+
+	<ofService>
+		<SuperService/>
+	</ofService>
+
+	<ofBWComponent>
+		<service/>
+	</ofBWComponent>
+
+</root>

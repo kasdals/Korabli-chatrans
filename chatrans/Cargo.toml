@@ -1,0 +1,68 @@
+[package]
+name = "chatrans"
+version = "0.2.0"
+authors = ["Rorin <syusux@gmail.com>"]
+edition = "2021"
+publish = false
+
+[dependencies]
+replay-parser = { version = "0.1.1", path = "../parser" }
+clap = { version = "4.5.4", features = ["derive"] }
+serde = { version = "1.0.200", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0.82"
+notify = "6.1.1"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+tokio-util = "0.7.10"
+futures-util = "0.3.30"
+async-channel = "2.2.1"
+md-5 = "0.10.6"
+base64 = "0.22.0"
+reqwest = "0.12.4"
+sha1 = "0.10.6"
+hmac = "0.12.1"
+chrono = "0.4.38"
+url = "2.5.0"
+
+# 方案 C：翻译功能的窗口搬进 chatrans（S2 落地）。GUI 是可选 feature，
+# 默认不编译 —— `cargo build --features gui` 时才引入 eframe/winit，
+# 保证现有 headless/CLI 用户的构建图不被拖累。
+# S5 起 gui feature 还带原生目录选择（rfd）与注册表探测（winreg）。
+[dependencies.eframe]
+version = "0.32"
+optional = true
+default-features = false
+features = ["glow", "default_fonts"]
+
+[dependencies.rfd]
+version = "0.14"
+optional = true
+
+[dependencies.winreg]
+version = "0.52"
+optional = true
+
+[features]
+default = []
+gui = ["dep:eframe", "dep:rfd", "dep:winreg"]
+
+[dependencies.uuid]
+version = "1.8.0"
+features = [
+    "v4",
+    "fast-rng",
+    "macro-diagnostics",
+]
+
+[dependencies.tokio]
+version = "1.37.0"
+features = [
+    "rt",
+    "rt-multi-thread",
+    "net",
+    "time",
+    "macros",
+    "signal",
+    "sync"
+]

@@ -1,0 +1,20 @@
+<root>
+	<BaseMethods>
+		<sendInvite>
+			<Arg> DB_ID </Arg>
+			<Exposed/>
+		</sendInvite>
+	</BaseMethods>
+
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+		<cell/>
+	</ofBWComponent>
+</root>

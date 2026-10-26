@@ -1,0 +1,63 @@
+<root>
+
+	<BaseMethods>
+		<rerollTask>
+			<Exposed/>
+			<Args>
+				<index> UINT8 </index>
+			</Args>
+			<ReturnValues>
+				<newTask> PYTHON </newTask>
+			</ReturnValues>
+		</rerollTask>
+
+		<claimComplexThresholdReward>
+			<Exposed/>
+			<Args>
+				<thresholdIndex> UINT16 </thresholdIndex>
+				<rewardIndex> UINT8 </rewardIndex>
+			</Args>
+			<ReturnValues>
+				<claimed> BOOL </claimed>
+			</ReturnValues>
+		</claimComplexThresholdReward>
+
+		<claimAllComplexThresholdRewards>
+			<Exposed/>
+			<ReturnValues>
+				<claimed> BOOL </claimed>
+			</ReturnValues>
+		</claimAllComplexThresholdRewards>
+	</BaseMethods>
+
+	<ClientMethods>
+		<receiveWaffentragerServerInactive/>
+
+		<receiveEventEnded/>
+
+		<receiveTasks>
+			<Args>
+				<newTasks> PYTHON </newTasks>
+				<updatedTasks> PYTHON </updatedTasks>
+				<doneTasks> PYTHON </doneTasks>
+			</Args>
+		</receiveTasks>
+
+		<receiveBoosterTotalFactors>
+			<Args>
+				<totalFactors> MSGPACK_BLOB </totalFactors>
+			</Args>
+		</receiveBoosterTotalFactors>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

@@ -1,0 +1,17 @@
+<root>
+	<BaseMethods>
+		<setBotTestBattleParams>
+			<Args>
+				<packedParams> BLOB </packedParams>
+			</Args>
+		</setBotTestBattleParams>
+	</BaseMethods>
+
+	<ofEntity>
+		<TrainingRoom/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+	</ofBWComponent>
+</root>

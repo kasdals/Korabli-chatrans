@@ -1,0 +1,66 @@
+<root>
+
+	<BaseMethods>
+		<buyBattlePass>
+			<Exposed/>
+			<Args>
+				<battlePassID> UINT16 </battlePassID>
+				<type> UINT8 </type>
+			</Args>
+		</buyBattlePass>
+		<claimReward>
+			<Exposed/>
+			<Args>
+				<battlePassID> UINT16 </battlePassID>
+				<level> UINT16 </level>
+				<rewardType> UINT8 </rewardType>
+				<index> UINT8 </index>
+			</Args>
+			<ReturnValues>
+				<result>BOOL</result>
+			</ReturnValues>
+		</claimReward>
+		<claimRewards>
+			<Exposed/>
+			<Args>
+				<battlePassID> UINT16 </battlePassID>
+				<battlePassRewardsParams> TUPLE <of> TUPLE <of> UINT8 </of> <size> 3 </size> </of> </battlePassRewardsParams>
+			</Args>
+			<ReturnValues>
+				<result> BOOL </result>
+			</ReturnValues>
+		</claimRewards>
+		<claimAllRewards>
+			<Exposed/>
+			<Args>
+				<battlePassID> UINT16 </battlePassID>
+			</Args>
+			<ReturnValues>
+				<claimedRewards> MSGPACK_BLOB </claimedRewards>
+			</ReturnValues>
+		</claimAllRewards>
+	</BaseMethods>
+
+	<ClientMethods>
+		<startSyncDelay/>
+		<syncEmptyBattlePass/>
+		<onClaimFailed>
+			<Args>
+				<battlePassID> UINT16 </battlePassID>
+				<level> UINT16 </level>
+				<rewardType> UINT8 </rewardType>
+			</Args>
+		</onClaimFailed>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>
+

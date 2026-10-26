@@ -1,0 +1,62 @@
+<root>
+	<BaseMethods>
+
+		<changeOwner>
+			<Args>
+				<newOwnerID>INT64</newOwnerID>
+			</Args>
+			<Exposed/>
+		</changeOwner>
+
+		<kickPlayer>
+			<Args>
+				<playerID>INT64</playerID>
+			</Args>
+			<Exposed/>
+		</kickPlayer>
+
+		<sendInvite>
+			<Args>
+				<accountDBID>INT64</accountDBID>
+				<inviteType>INT64</inviteType>
+			</Args>
+			<Exposed/>
+		</sendInvite>
+
+		<revokeInvite>
+			<Args>
+				<playerID>INT64</playerID>
+			</Args>
+			<Exposed/>
+		</revokeInvite>
+
+		<quitPreBattle>
+			<Exposed/>
+		</quitPreBattle>
+
+		<lock>
+			<Exposed/>
+		</lock>
+
+		<unlock>
+			<Exposed/>
+		</unlock>
+
+		<dismiss>
+			<Exposed/>
+		</dismiss>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+		<cell/>
+	</ofBWComponent>
+
+</root>

@@ -1,0 +1,113 @@
+<root>
+
+	<Methods>
+
+		<createEntityOnCluster>
+			<Args>
+				<clusterID> CLUSTER_ID </clusterID>
+				<entityType> STRING </entityType>
+				<entityParams> MSGPACK_BLOB </entityParams>
+			</Args>
+			<ReturnValues>
+				<entityMailbox> MAILBOX </entityMailbox>
+			</ReturnValues>
+		</createEntityOnCluster>
+
+		<lookupAccountEntityByDBID>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+				<redirectRequestToOtherCluster> BOOL </redirectRequestToOtherCluster>
+			</Args>
+			<ReturnValues>
+				<accountMailbox> MAILBOX </accountMailbox>
+			</ReturnValues>
+		</lookupAccountEntityByDBID>
+
+		<loadAccount>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+				<loadArgs> ACCOUNT_LOAD_ARGS_DEF </loadArgs>
+			</Args>
+			<ReturnValues>
+				<account> MAILBOX </account>
+			</ReturnValues>
+		</loadAccount>
+
+		<loadAccountOnCurrentMaster>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+				<entityParams> MSGPACK_BLOB </entityParams>
+			</Args>
+			<ReturnValues>
+				<entityMailbox> MAILBOX </entityMailbox>
+			</ReturnValues>
+		</loadAccountOnCurrentMaster>
+
+		<removeAccountOnCurrentMaster>
+			<Args>
+				<accountDBID> DB_ID </accountDBID>
+				<loadParams> MSGPACK_BLOB </loadParams>
+			</Args>
+			<ReturnValues>
+				<entityMailbox> UINT8 </entityMailbox>
+			</ReturnValues>
+		</removeAccountOnCurrentMaster>
+
+		<createBattleSessionEntity>
+			<Args>
+				<clusterID> CLUSTER_ID </clusterID>
+				<entityParams> CREATE_BATTLE_SESSION_PARAMS </entityParams>
+			</Args>
+			<ReturnValues>
+				<entityMailbox> MAILBOX </entityMailbox>
+			</ReturnValues>
+		</createBattleSessionEntity>
+
+		<createPreBattleEntity>
+			<Args>
+				<clusterID> CLUSTER_ID </clusterID>
+				<entityParams> CREATE_PRE_BATTLE_PARAMS </entityParams>
+			</Args>
+			<ReturnValues>
+				<entityMailbox> MAILBOX </entityMailbox>
+			</ReturnValues>
+		</createPreBattleEntity>
+
+		<createTrainingRoomEntity>
+			<Args>
+				<clusterID> CLUSTER_ID </clusterID>
+				<entityParams> CREATE_TRAINING_ROOM_PARAMS </entityParams>
+			</Args>
+			<ReturnValues>
+				<entityMailbox> MAILBOX </entityMailbox>
+			</ReturnValues>
+		</createTrainingRoomEntity>
+
+		<subscribeForLoadAccounts>
+			<Args>
+				<accountDBIDs> ARRAY <of> DB_ID </of> </accountDBIDs>
+				<subscriberMBox> MAILBOX </subscriberMBox>
+			</Args>
+			<ReturnValues>
+				<result> UINT8 </result>
+			</ReturnValues>
+		</subscribeForLoadAccounts>
+
+		<updateSubscriptionsForLoadAccounts>
+			<Args>
+				<updatedAppSubscriptions> ARRAY <of> ACCOUNT_LOAD_SUBSCRIPTION_UPDATE_DEF </of> </updatedAppSubscriptions>
+				<subscriberApp> MAILBOX </subscriberApp>
+			</Args>
+		</updateSubscriptionsForLoadAccounts>
+
+	</Methods>
+
+	<ofService>
+		<MasterService/>
+	</ofService>
+
+	<ofBWComponent>
+		<service/>
+	</ofBWComponent>
+
+</root>

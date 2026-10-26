@@ -1,0 +1,113 @@
+<root>
+
+	<BaseMethods>
+
+		<onXMPPSettingsUpdate>
+			<Args>
+				<chatBlocked> BOOL </chatBlocked>
+				<battleChatBlocked> BOOL </battleChatBlocked>
+				<prebattleChatBlocked> BOOL </prebattleChatBlocked>
+				<desriptionFieldsBlocked> BOOL </desriptionFieldsBlocked>
+			</Args>
+		</onXMPPSettingsUpdate>
+
+		<receiveAuthToken>
+			<Args>
+				<spaID> DB_ID </spaID>
+				<token> AUTH_TOKEN </token>
+			</Args>
+		</receiveAuthToken>
+
+		<chatMessage>
+			<Args>
+				<destination> STRING </destination>
+				<message> STRING </message>
+			</Args>
+			<Exposed/>
+		</chatMessage>
+
+		<addBan>
+			<Args>
+				<cmdCode> INT8 </cmdCode>
+				<duration> INT32 </duration>
+				<nickName> UNICODE_STRING </nickName>
+				<banReason> UNICODE_STRING </banReason>
+				<channelID> UNICODE_STRING </channelID>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</addBan>
+
+		<removeBan>
+			<Args>
+				<cmdCode> INT8 </cmdCode>
+				<nickName> UNICODE_STRING </nickName>
+				<channelID> UNICODE_STRING </channelID>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</removeBan>
+
+		<updateChatBan>
+			<Args>
+				<chatBan> PYTHON </chatBan>
+			</Args>
+		</updateChatBan>
+
+		<requestAuthToken>
+			<Exposed/>
+		</requestAuthToken>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<onXMPPSettingsUpdate>
+			<Args>
+				<chatBlocked> BOOL </chatBlocked>
+				<battleChatBlocked> BOOL </battleChatBlocked>
+				<prebattleChatBlocked> BOOL </prebattleChatBlocked>
+				<desriptionFieldsBlocked> BOOL </desriptionFieldsBlocked>
+			</Args>
+		</onXMPPSettingsUpdate>
+
+		<receiveAuthToken>
+			<Args>
+				<spaID> DB_ID </spaID>
+				<token> AUTH_TOKEN </token>
+			</Args>
+		</receiveAuthToken>
+
+		<onChatMessageBanChat>
+			<Args>
+				<channelID> STRING </channelID>
+				<extraData> CHAT_SYSTEM_MESSAGE_BAN </extraData>
+			</Args>
+		</onChatMessageBanChat>
+
+		<onChatMessageSystemDuty>
+			<Args>
+				<channelID> STRING </channelID>
+				<messageType> UINT8 </messageType>
+				<message> STRING </message>
+			</Args>
+		</onChatMessageSystemDuty>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Avatar/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+		<cell/>
+	</ofBWComponent>
+
+</root>

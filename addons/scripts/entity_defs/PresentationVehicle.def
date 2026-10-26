@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <Properties>
+        <isPlayer>
+            <Type>BOOL</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </isPlayer>
+        <shipConfig>
+            <Type>SHIP_CONFIG</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </shipConfig>
+        <isResurrecting>
+            <Type>BOOL</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>0</Default>
+        </isResurrecting>
+        <state>
+            <Type>VEHICLE_STATE</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>
+                <battery>
+                    <energy>0.0</energy>
+                    <surfacingTimerIndex>0</surfacingTimerIndex>
+                </battery>
+            </Default>
+        </state>
+    </Properties>
+</root>
+

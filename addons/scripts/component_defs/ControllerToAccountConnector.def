@@ -1,0 +1,58 @@
+
+<root>
+	<TempProperties>
+		<loginEnabled/>
+		<_pingAccountCounter/>
+		<_ControllerToAccountConnector__accountCheckVaryID/>
+		<_ControllerToAccountConnector__accountWaiter/>
+		<masterChanger/>
+	</TempProperties>
+
+	<BaseMethods>
+
+		<getReadyAccountMBox>
+			<Args>
+				<timeout> UINT16 </timeout>
+			</Args>
+			<ReturnValues>
+				<Arg> MAILBOX </Arg>
+			</ReturnValues>
+		</getReadyAccountMBox>
+
+		<onAccountRestored>
+			<Args>
+				<accountMBox> MAILBOX </accountMBox>
+			</Args>
+		</onAccountRestored>
+
+		<performAccountLoad>
+			<Args>
+				<masterID> MASTER_ID </masterID>
+				<masterService> MAILBOX </masterService>
+				<loadArgs> ACCOUNT_LOAD_ARGS_DEF </loadArgs>
+			</Args>
+ 			<ReturnValues>
+				<mailbox> MAILBOX </mailbox>
+			</ReturnValues>
+		</performAccountLoad>
+
+		<onAccountDestroy>
+			<Args>
+				<persistentProperties> MSGPACK_BLOB </persistentProperties>
+				<destroyReason> UINT8 </destroyReason>
+				<masterChanger> MAILBOX </masterChanger>
+			</Args>
+		</onAccountDestroy>
+
+		<onMasterChangeProcessStarted/>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<AccountController/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+	</ofBWComponent>
+</root>

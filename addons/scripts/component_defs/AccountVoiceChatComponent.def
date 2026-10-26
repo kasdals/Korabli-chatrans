@@ -1,0 +1,40 @@
+<root>
+
+	<BaseMethods>
+
+		<requestAuthPack>
+			<Exposed/>
+		</requestAuthPack>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<onEnterVoiceChatRoom>
+			<Args>
+				<voiceChatRoomID> INT64 </voiceChatRoomID>
+			</Args>
+		</onEnterVoiceChatRoom>
+
+		<onLeaveVoiceChatRoom/>
+
+		<receiveAuthData>
+			<Args>
+				<authData> BLOB </authData>
+			</Args>
+			<VariableLengthHeaderSize> 2 </VariableLengthHeaderSize>
+		</receiveAuthData>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

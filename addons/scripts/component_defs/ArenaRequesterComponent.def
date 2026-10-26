@@ -1,0 +1,31 @@
+<root>
+	<Properties>
+		<_ArenaRequesterComponent__arenaMBox>
+			<Type> MAILBOX </Type>
+			<Flags> BASE </Flags>
+			<Default> None </Default>
+		</_ArenaRequesterComponent__arenaMBox>
+	</Properties>
+
+	<BaseMethods>
+		<onBattleEnd/>
+
+		<onArenaFailed/>
+
+		<onPlayerKicked>
+			<Args>
+				<playerSPAID> DB_ID </playerSPAID>
+				<kickReason> UINT8 </kickReason>
+				<pickledKickInfo> BLOB </pickledKickInfo>
+			</Args>
+		</onPlayerKicked>
+	</BaseMethods>
+
+	<ofEntity>
+		<BattleSession/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+	</ofBWComponent>
+</root>

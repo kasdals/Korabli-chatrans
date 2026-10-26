@@ -1,0 +1,28 @@
+<root>
+    <Domain>CLIENT</Domain>
+	<OptionsFlag>Enable</OptionsFlag>
+	<Properties>
+	    <model>
+			<Type> STRING </Type>
+			<Editable> True </Editable>
+			<Default> content/location/misc/gameplay/LMY043_animated_sound_udo/LMY043_animated_sound_udo.model </Default>
+		</model>
+		<additionalModels>
+			<Type>ARRAY<of>STRING</of></Type>
+			<Editable>True</Editable>
+		</additionalModels>
+		<additionalModelsPositionYPR>
+			<Type>ARRAY<of>STRING</of></Type>
+			<Editable>True</Editable>
+		</additionalModelsPositionYPR>
+	    <name>
+            <Type> STRING </Type>
+            <Editable> true </Editable>
+        </name>
+		<stage>
+		    <Type> UINT8 </Type>
+			<Editable> True </Editable>
+			<Default> 0 </Default>
+		</stage>
+	</Properties>
+</root>

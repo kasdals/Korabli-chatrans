@@ -1,0 +1,114 @@
+<root>
+
+	<ClientMethods>
+
+	</ClientMethods>
+
+	<CellMethods>
+
+		<teleportShip>
+			<Exposed/>
+			<Args>
+				<position> VECTOR3 </position>
+				<yaw> NULLABLE_FLOAT </yaw>
+			</Args>
+		</teleportShip>
+
+		<teleportToEntity>
+			<Exposed/>
+			<Args>
+				<entityId> ENTITY_ID </entityId>
+			</Args>
+		</teleportToEntity>
+
+		<teleportToClosestAlly>
+			<Exposed/>
+		</teleportToClosestAlly>
+
+		<damageArmorSegment>
+			<Exposed/>
+			<Args>
+				<segmentIndex> UINT8 </segmentIndex>
+				<thicknessDamage> FLOAT </thicknessDamage>
+			</Args>
+		</damageArmorSegment>
+
+		<updatePhysics>
+			<Exposed/>
+			<Args>
+				<needRecreate> BOOL </needRecreate>
+				<timeScale> NULLABLE_FLOAT </timeScale>
+				<replacedParams> MSGPACK_BLOB </replacedParams>
+			</Args>
+		</updatePhysics>
+
+		<setVehicleHealth>
+			<Exposed/>
+			<Args>
+				<health> INT32 </health>
+			</Args>
+		</setVehicleHealth>
+
+		<switchIdealGunHack>
+			<Args>
+				<flags> INT8 </flags>
+			</Args>
+		</switchIdealGunHack>
+
+		<switchCameraShootHack>
+			<Args>
+				<isEnabled> BOOL </isEnabled>
+			</Args>
+		</switchCameraShootHack>
+
+		<suicide>
+			<Exposed/>
+		</suicide>
+
+		<applyModifiers>
+			<Exposed/>
+			<Args>
+				<modifiers> MODIFIERS </modifiers>
+			</Args>
+		</applyModifiers>
+
+		<setHitLocationsStateByType>
+			<Exposed/>
+			<Args>
+				<hitLocationType> UINT8 </hitLocationType>
+				<hitLocationState> UINT8 </hitLocationState>
+			</Args>
+		</setHitLocationsStateByType>
+
+		<causeFakeDamage>
+			<Exposed/>
+			<Args>
+				<damage> FLOAT </damage>
+				<regeneratablePart> FLOAT </regeneratablePart>
+			</Args>
+		</causeFakeDamage>
+
+		<resetComponents>
+			<Exposed/>
+			<Args>
+				<resetComponentsInfo> RESET_COMPONENTS_INFO </resetComponentsInfo>
+			</Args>
+		</resetComponents>
+
+	</CellMethods>
+
+	<BaseMethods>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Vehicle/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<client/>
+		<bot/>
+		<cell/>
+	</ofBWComponent>
+</root>

@@ -1,0 +1,64 @@
+<root>
+	<BaseMethods>
+		<chooseShipType>
+			<Exposed/>
+			<Args>
+				<shipTypeID> UINT8 </shipTypeID>
+			</Args>
+			<ReturnValues>
+				<skillsChoosingContainerDump> ARRAY <of> ARRAY <of> UINT8 </of> </of> </skillsChoosingContainerDump>
+			</ReturnValues>
+		</chooseShipType>
+
+		<chooseSkills>
+			<Exposed/>
+			<Args>
+				<skillIndices> ARRAY <of> UINT8 </of> </skillIndices>
+			</Args>
+			<ReturnValues>
+				<skillPacksChoosingContainerDump>
+					ARRAY <of> ARRAY <of> ARRAY <of> UINT8 </of> </of> </of>
+				</skillPacksChoosingContainerDump>
+			</ReturnValues>
+		</chooseSkills>
+
+		<buyAdditionalSkillPack>
+			<Exposed/>
+			<ReturnValues>
+				<lastPackDump> ARRAY <of> ARRAY <of> UINT8 </of> </of> </lastPackDump>
+			</ReturnValues>
+		</buyAdditionalSkillPack>
+
+		<chooseSkillPack>
+			<Exposed/>
+			<Args>
+				<skillPackIndex> UINT8 </skillPackIndex>
+				<crewID> CREW_ID </crewID>
+			</Args>
+			<ReturnValues>
+				<success> BOOL </success>
+			</ReturnValues>
+		</chooseSkillPack>
+	</BaseMethods>
+
+	<ClientMethods>
+		<startSyncDelay>
+		</startSyncDelay>
+
+		<receiveBookAmount>
+			<Args>
+				<bookAmount> UINT32 </bookAmount>
+			</Args>
+		</receiveBookAmount>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

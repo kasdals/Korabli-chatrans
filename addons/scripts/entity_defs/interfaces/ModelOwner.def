@@ -1,0 +1,37 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onPlayEffect>
+			<Args>
+				<name> STRING </name>
+				<node> STRING </node>
+				<yaw> FLOAT </yaw>
+			</Args>
+		</onPlayEffect>
+		<onPlaySound>
+			<Args>
+				<name> STRING </name>
+				<node> STRING </node>
+			</Args>
+		</onPlaySound>
+	</ClientMethods>
+
+	<Properties>
+		<effects>
+			<Type>ARRAY<of>ENTITY_CLIENT_EFFECTS_STATE</of></Type>
+			<Flags> ALL_CLIENTS </Flags>
+		</effects>
+		<sounds>
+			<Type>ARRAY<of>ENTITY_CLIENT_SOUNDS_STATE</of></Type>
+			<Flags> ALL_CLIENTS </Flags>
+		</sounds>
+	</Properties>
+
+	<TempProperties>
+	</TempProperties>
+
+	<CellMethods>
+	</CellMethods>
+</root>

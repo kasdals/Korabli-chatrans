@@ -1,0 +1,143 @@
+<root>
+
+	<Properties>
+		<_TournamentRoomMemberComponent__roomMBox>
+			<Type> MAILBOX </Type>
+			<Flags> BASE </Flags>
+		</_TournamentRoomMemberComponent__roomMBox>
+	</Properties>
+
+	<BaseMethods>
+
+	<!-- server api -->
+
+		<becomeMember>
+			<Args>
+				<tournamentRoom> MAILBOX </tournamentRoom>
+				<roomWebID> TOURNAMENT_ROOM_WEB_ID </roomWebID>
+			</Args>
+			<ReturnValues>
+				<memberDef> TOURNAMENT_ROOM_MEMBER_DEF </memberDef>
+				<memberExtraInfo> PYTHON </memberExtraInfo>
+				<memberHasClient> BOOL </memberHasClient>
+			</ReturnValues>
+		</becomeMember>
+
+		<receiveMembershipData>
+			<Args>
+				<roomID> ENTITY_ID </roomID>
+				<membershipData> TOURNAMENT_ROOM_MEMBERSHIP_DATA </membershipData>
+				<chatHistoryDefs> ARRAY <of> CHAT_MESSAGE_HISTORY_DEF </of> </chatHistoryDefs>
+				<isPlayerEntering> BOOL </isPlayerEntering>
+			</Args>
+		</receiveMembershipData>
+
+		<updateMembershipData>
+			<Args>
+				<roomID> ENTITY_ID </roomID>
+				<membershipData> TOURNAMENT_ROOM_MEMBERSHIP_DATA </membershipData>
+			</Args>
+		</updateMembershipData>
+
+		<receiveChatMessage>
+			<Args>
+				<senderSPAID> DB_ID </senderSPAID>
+				<message> STRING </message>
+				<messageCreationTime> TIMESTAMP </messageCreationTime>
+			</Args>
+		</receiveChatMessage>
+
+		<onBecomeNonMember>
+			<Args>
+				<roomWebID> TOURNAMENT_ROOM_WEB_ID </roomWebID>
+				<removeReason> UINT8 </removeReason>
+			</Args>
+		</onBecomeNonMember>
+
+	<!-- /server api -->
+	<!-- client api -->
+
+		<exitRoom>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</exitRoom>
+
+		<trySetUnready>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</trySetUnready>
+
+		<trySetReady>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</trySetReady>
+
+		<tryAddMemberToTeamCorePart>
+			<Args>
+				<memberToCorePartSPAID> DB_ID </memberToCorePartSPAID>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</tryAddMemberToTeamCorePart>
+
+		<tryRemoveMemberFromTeamCorePart>
+			<Args>
+				<memberFromCorePartSPAID> DB_ID </memberFromCorePartSPAID>
+			</Args>
+			<ReturnValues>
+				<resultID> UINT8 </resultID>
+			</ReturnValues>
+			<Exposed/>
+		</tryRemoveMemberFromTeamCorePart>
+
+		<sendMessageToPlayers>
+			<Args>
+				<chatMessage> STRING </chatMessage>
+			</Args>
+			<Exposed/>
+		</sendMessageToPlayers>
+
+	<!-- /client api -->
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<onBecomeNonMember>
+			<Args>
+				<removeReason> UINT8 </removeReason>
+			</Args>
+		</onBecomeNonMember>
+
+		<receiveChatMessage>
+			<Args>
+				<senderSPAID> DB_ID </senderSPAID>
+				<message> STRING </message>
+				<messageCreationTime> TIMESTAMP </messageCreationTime>
+			</Args>
+		</receiveChatMessage>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

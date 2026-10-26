@@ -1,0 +1,41 @@
+<root>
+	<BaseMethods>
+		<gotSprintSummaryShown>
+			<Args>
+				<seasonId> INT16 </seasonId>
+			</Args>
+			<Exposed/>
+		</gotSprintSummaryShown>
+		<requestRankedDossier>
+			<Args>
+				<seasonId> INT16 </seasonId>
+				<leagueId> UINT8 </leagueId>
+				<isOld> BOOL </isOld>
+			</Args>
+			<Exposed/>
+		</requestRankedDossier>
+	</BaseMethods>
+	
+	<ClientMethods>
+		<onStartRankBattlesSync/>
+		<getRankedBattlesStage>
+			<Args>
+				<seasonId> INT16 </seasonId>
+				<stage> INT8 </stage>
+				<currentSprintId> INT16 </currentSprintId>
+				<nextSprintId> INT16 </nextSprintId>
+				<previousSprintId> INT16 </previousSprintId>
+			</Args>
+		</getRankedBattlesStage>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

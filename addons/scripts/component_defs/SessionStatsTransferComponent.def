@@ -1,0 +1,29 @@
+<root>
+	<BaseMethods>
+		<getSessionData>
+			<Exposed/>
+		</getSessionData>
+		<clearSessionStatsData>
+			<Exposed/>
+		</clearSessionStatsData>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onGetSessionStatsData>
+			<Args>
+				<allBattlesCountMarker> INT32 </allBattlesCountMarker>
+				<dossier> BLOB </dossier>
+			</Args>
+		</onGetSessionStatsData>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+	
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+</root>

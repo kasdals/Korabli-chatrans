@@ -1,0 +1,57 @@
+<root>
+
+	<BaseMethods>
+		<rerollTask>
+			<Exposed/>
+			<Args>
+				<poolIndex> UINT8 </poolIndex>
+				<taskID> STRING </taskID>
+			</Args>
+		<ReturnValues>
+			<newTask> MSGPACK_BLOB </newTask>
+			<rerollTasks> MSGPACK_BLOB </rerollTasks>
+		</ReturnValues>
+		</rerollTask>
+
+		<claimThresholdReward>
+			<Exposed/>
+			<Args>
+				<thresholdIndex> UINT16 </thresholdIndex>
+				<rewardIndex> UINT8 </rewardIndex>
+			</Args>
+			<ReturnValues>
+				<success> BOOL </success>
+			</ReturnValues>
+		</claimThresholdReward>
+	</BaseMethods>
+
+	<ClientMethods>
+		<startSyncDelay/>
+
+		<receiveUpdate>
+			<Args>
+				<newTasks> MSGPACK_BLOB </newTasks>
+				<updatedTasks> MSGPACK_BLOB </updatedTasks>
+				<rerollTasks> MSGPACK_BLOB </rerollTasks>
+				<doneTaskCounts> ARRAY <of> UINT8 </of> </doneTaskCounts>
+			</Args>
+		</receiveUpdate>
+
+		<receiveRerollTasksUpdate>
+			<Args>
+				<rerollTasks> MSGPACK_BLOB </rerollTasks>
+			</Args>
+		</receiveRerollTasksUpdate>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

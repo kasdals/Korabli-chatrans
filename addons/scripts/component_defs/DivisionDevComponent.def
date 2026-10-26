@@ -1,0 +1,44 @@
+<root>
+	<BaseMethods>
+
+		<tryAddBot>
+			<Args>
+				<botOrOwnerShipID>UINT32</botOrOwnerShipID>
+				<needToGenerateRandomShipId>BOOL</needToGenerateRandomShipId>
+			</Args>
+		</tryAddBot>
+
+		<addBot>
+			<Args>
+				<botDef>PLAYER_DEF</botDef>
+			</Args>
+			<ReturnValues>
+				<result> BOOL </result>
+			</ReturnValues>
+		</addBot>
+
+		<removeAllBots>
+		</removeAllBots>
+
+		<kickBot>
+			<Args>
+				<botId>PLAYER_ID</botId>
+			</Args>
+			<ReturnValues>
+				<result> BOOL </result>
+			</ReturnValues>
+		</kickBot>
+
+		<setBotsReady>
+		</setBotsReady>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Division/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+	</ofBWComponent>
+</root>
