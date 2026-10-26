@@ -1,125 +1,130 @@
 <div align="center">
     <h2 align="center">Chatrans</h2>
     <p align="center">
-        A real-time chat interpreter for Korabli.
+        Korabli（战舰世界 / Lesta 客户端）战局聊天实时翻译悬浮面板
         <br />
-        <br />
-        <a href="https://github.com/Yusux/Korabli-chatrans/blob/main/README.md">English Document</a>
+        <a href="README.md">简体中文</a>
         ·
-        <a href="https://github.com/Yusux/Korabli-chatrans/blob/main/docs/README_CN.md">中文文档</a>
-        <br />
-        <a href="https://github.com/Yusux/Korabli-chatrans/issues">Report Bug</a>
+        <a href="docs/README_CN.md">简体中文（备份）</a>
         ·
-        <a href="https://github.com/Yusux/Korabli-chatrans/issues">Request Feature</a>
+        <a href="https://github.com/Yusux/Korabli-chatrans">上游项目</a>
     </p>
 </div>
 
-## About The Project
+## 这是什么
 
-This is a real-time chat interpreter for Korabli developed from [wows-replays](https://github.com/lkolbly/wows-replays). It watches the `replays` folder under the game root directory, reads the chat messages from the `temp.korablireplay` / `tempArenaInfo.json` files while you are in a battle, and shows them on an **always-on-top overlay panel** with optional LLM-powered translation (OpenAI / Anthropic compatible endpoints).
+在**对局进行中**实时读取游戏 `replays` 目录的 `temp.korablireplay` / `tempArenaInfo.json`，把战局聊天实时显示在一个**置顶悬浮面板**上，并可选接入 OpenAI / Anthropic 兼容的模型供应商（DeepSeek、通义等）做 LLM 翻译。
 
-Two ways to use it:
+- 双击 `chatrans.exe` 即可启动，**不会弹出黑色控制台窗口**
+- 首次运行自动发现游戏目录，**TomatoRadar 翻译插件的老配置自动迁移**（API key 无需重填）
+- 面板默认锁定、点击穿透——**绝不抢游戏的鼠标点击与键盘焦点**
+- API key 经 Windows DPAPI 加密存储，不落明文、不进日志
 
-- **Double-click `chatrans.exe` (GUI mode, recommended)** — a translation panel floats over the game. First run opens a settings view where you pick the game directory and fill in your API endpoint. Since v0.2 the built-in WebSocket/SSE web client has been removed; the panel is the client.
-- **Console mode (`--headless` or a build without the `gui` feature)** — prints the original chat lines to the terminal. No translation is done in this mode; translation runs in the GUI panel.
+## 快速开始
 
-### Todo List
+本仓库暂无预编译版本，需自行编译：
 
-- [ ] Add in-gaming chat message interpreter
+``` sh
+git clone https://github.com/kasdals/Korabli-chatrans.git
+cd Korabli-chatrans
+cargo build --release --features gui
+```
 
+产物在 `target\release\chatrans.exe`。不带 `--features gui` 会得到纯控制台构建。
 
-## Getting Started
+> **游戏大版本更新后解析失败？** `addons/scripts` 是从游戏内解包的实体定义，大版本更新后可能过期。从 [Korabli-scripts](https://github.com/Yusux/Korabli-scripts) 获取最新版覆盖 `addons/scripts` 后重新编译即可。
 
-The compiled executable can be found in the [releases](https://github.com/Yusux/Korabli-chatrans/releases) page. Choose the proper version and download the executable.
+## 首次设置（三步）
 
-You can also compile the project yourself. The following instructions will help you to compile the project.
+双击 `chatrans.exe`，首次运行会自动打开设置视图：
 
-### *Prerequisites
+1. **游戏路径** —— 程序按「注册表 → 常见安装路径」自动发现（如 `E:\Game\Korabli`）；未命中时点**浏览…**手动选择游戏根目录（即包含 `replays` 文件夹的那一级）。路径有效会显示绿色 ✓。`replays` 子目录会自动推导并创建，无需手动指定。
+2. **模型供应商**（用翻译就必填）—— 填写 ID、名称、API Base URL、API Key（输入框默认掩码，点眼睛切换明文核对），模型可点**获取模型列表**从供应商拉取（失败会红字提示，可手动填模型 id）。点**添加更多**可配多个供应商，单选按钮决定当前生效的那个。高级配置里可调超时秒数、代理地址（如 `http://127.0.0.1:7890`）、自定义请求头。
+3. **保存配置** —— 路径有效时面板立即开始监听，进对局聊天即上屏。
 
-- rustc
-  - Installation: [Rustup](https://rustup.rs/)
+底部还可调：目标语言（默认中文）、频道范围（只翻译队伍频道 / 全部）、仅译文（隐藏原文行）、面板透明度（40%–100%，实时预览）。
 
-### *Compilation
+## 面板使用
 
-1. Clone the repository.
-    ``` sh
-    git clone git@github.com:Yusux/Korabli-chatrans.git
-    cd Korabli-chatrans
-    ```
-2. Pull submodules.
-    ``` sh
-    git submodule update --init --recursive
-    ```
-    > P.S. This part is for getting the `scripts` folder unpacked from the game. We provide the latest scripts from the official server in [Korabli-scripts](https://github.com/Yusux/Korabli-scripts), but we cannot guarantee that it will be updated in time for every server update. If the previous version of Chatrans cannot work properly after the game version is updated, please try to update this submodule first or unpack the scripts yourself and put them in the `addons/scripts` folder.
-3. Compile the project.
-    ``` sh
-    cargo build --release --features gui
-    ```
-    (Without `--features gui` you get a console-only build.)
-4. The compiled executable `chatrans.exe` will be found in `target/release/` directory.
+顶栏图标（右 → 左）：**关闭 · 置顶 · 清空 · 设置（齿轮）· 锁定（锁）**。
 
-## Usage
-
-### GUI mode (double-click)
-
-Double-click `chatrans.exe` — no arguments needed:
-
-1. **First run**: the settings view opens automatically. Chatrans tries to find your game directory for you (Windows registry → common paths such as `D:\Game\Korabli`); if it fails, use **浏览…** (browse) to pick the game root directory (the folder that contains the `replays` folder, e.g. `D:\Game\Korabli`).
-2. **Translation endpoints** (optional): fill in an OpenAI- or Anthropic-compatible endpoint (name / base URL / API key / model). You can fetch the model list from the endpoint, or type model ids manually. Multiple endpoints are supported; the radio button picks the active one. Keys are stored encrypted with Windows DPAPI (`secrets.dat`) and never written in plain text.
-3. Click **保存配置** (save). If the game path is valid, the panel immediately starts listening for battles.
-4. Enter a battle — chat lines appear on the panel with `[友]`/`[敌]` team badges; team channel lines are translated by the active endpoint.
-
-The panel starts **locked** (click-through, so it never steals clicks from the game). Click the padlock icon to unlock and drag/resize it; hover the top bar for 150 ms in locked mode to reach the icons. The gear icon opens/closes the settings view.
-
-Configuration lives in `%LOCALAPPDATA%\KorabliOne\`:
-
-| File | Content |
+| 操作 | 说明 |
 | --- | --- |
-| `app.json` | Game directory (doubles as the "configured" flag) |
-| `translation.json` | Translation endpoints (superset of the TomatoRadar addon schema — old addon configs are migrated automatically) |
-| `secrets.dat` | API keys, DPAPI-encrypted |
-| `placement.json` | Panel position/size |
+| 锁定（默认） | 整窗点击穿透，游戏操作零干扰。把鼠标悬停在顶栏 **150ms** 即可临时接管，点图标；锁定状态会被记住，重启自动恢复 |
+| 解锁 | 拖动标题栏移动；拖窗口边缘缩放（对边钉住不跑偏）；位置尺寸持久化，重启恢复 |
+| 打开设置 | 锁定态也可点齿轮；设置打开期间整窗可交互（可以正常打字），关闭后立即恢复锁定语义 |
+| 置顶 | 切换 always-on-top |
+| 清空 | 清空当前消息列表 |
 
-### Console mode
+**状态行**（面板底部）：
+
+| 显示 | 含义 |
+| --- | --- |
+| `已连接 · 本局 N 条 · 已译 M 条` | 正常工作中 |
+| `未配置游戏路径 · 点这里打开设置` | 还没配游戏路径（锁定态下点击穿透，走齿轮进设置） |
+| `后台管线未运行` | 监听线程未启动或已退出，重启程序可恢复 |
+| `连不上：<原因>` | 模型供应商请求失败（查 API key、Base URL、网络/代理）；恢复后自动回到正常态 |
+
+## 从 TomatoRadar 翻译插件迁移（老用户）
+
+无需任何操作。首次启动检测到 `%LOCALAPPDATA%\TomatoRadar\Addons\Translation` 下的旧配置（`translation.json` / `secrets.dat`）会自动迁移到本程序，**API key 原样继承，不用重填**。原插件目录不会被修改。
+
+## 配置文件
+
+全部位于 `%LOCALAPPDATA%\KorabliOne\`：
+
+| 文件 | 内容 |
+| --- | --- |
+| `app.json` | 游戏目录等本机配置 |
+| `translation.json` | 模型供应商配置（TomatoRadar 插件 schema 的超集，字段名仍为 `Endpoint*`） |
+| `secrets.dat` | API 密钥，DPAPI 加密，永不落明文 |
+| `placement.json` | 面板位置 / 尺寸 / 锁定状态 / 透明度（自动修正越界与脏值） |
+| `logs\chatrans.log` | 运行日志（单文件 2MB 上限，超出滚动为 `.log.1`） |
+
+> **用词说明**：界面上叫「模型供应商」，配置字段叫 `Endpoint` —— 后者是 TomatoRadar 插件的既有 schema，为兼容老配置不改名，两者是同一个东西。
+
+## 控制台模式（可选）
 
 ``` powershell
-.\chatrans.exe -r 'path\to\replays'
+.\chatrans.exe -r 'D:\Game\Korabli\replays'
 ```
 
-Prints original chat lines as they happen:
+实时把聊天**原文**打印到终端（`── 新对局开始：×× ──` / `[友] …` / `[敌] …`）。控制台模式**不做翻译**——翻译能力在 GUI 面板里。GUI 构建加 `--headless` 行为相同。
 
-``` text
-── 新对局开始：北方海峡 ──
-[友] Alice·Minotaur: gg wp
-[敌] Bob: нужна поддержка
-```
-
-No translation is performed in console mode — use the GUI panel for translation. `--headless` on a GUI build behaves the same way.
+启动规则：**双击（无参数）** = 纯 GUI，不占用任何控制台，日志写 `logs\chatrans.log`；**带参数** = 附着当前终端运行，输出直接可见。
 
 ``` text
 Usage: chatrans.exe [OPTIONS] --replay-dir <REPLAY_DIR>
 
 Options:
-  -r, --replay-dir <REPLAY_DIR>
-          The replay dir to use
-  -t, --target-language <TARGET_LANGUAGE>
-          The target language, where `zh` stands for Chinese, `en` stands for English. Default is `zh` [default: zh]
-      --access-key-id <ACCESS_KEY_ID>
-          The Aliyun access key id
-      --access-key-secret <ACCESS_KEY_SECRET>
-          The Aliyun access key secret
-      --headless
-          Run without the translation overlay panel (console mode)
-  -h, --help
-          Print help
-  -V, --version
-          Print version
+  -r, --replay-dir <REPLAY_DIR>        回放目录
+  -t, --target-language <LANG>         目标语言，zh/en，默认 zh
+      --access-key-id <ID>             Aliyun access key id（内置解释器用）
+      --access-key-secret <SECRET>     Aliyun access key secret
+      --headless                       不启动面板（控制台模式）
+  -h, --help                           打印帮助
+  -V, --version                        打印版本
 ```
 
-## Contributing
+## 已知限制
 
-Any contributions you make are **greatly appreciated**. You can fork the repository and make a pull request. Also, you can open an issue if you find a bug or want to request a feature.
+- 自动发现仅覆盖部分安装方式（注册表 + 常见盘符路径）；未命中时**手动浏览**永远可用
+- 部分系统环境下面板底边可能滑进任务栏区域（Windows 工作区 API 失败的环境特异问题）
+- 多显示器场景未做适配
+- 翻译延迟取决于供应商响应速度（DeepSeek 实测约 1–3 秒/条）
+- 关闭面板 = 退出程序（本程序无宿主主窗口，面板即程序）
 
-## License
+## 二次开发
 
-Distributed under the MIT License. See [LICENSE](https://github.com/Yusux/Korabli-chatrans/blob/main/LICENSE) for more information.
+``` sh
+cargo test                        # 默认构建测试
+cargo test --features gui         # 含 GUI 全量测试
+cargo build --release             # 控制台版
+cargo build --release --features gui   # GUI 版
+```
+
+GUI 相关代码在 `chatrans/src/gui/`（面板/交互/设置视图），翻译链路在 `chatrans/src/translate/`（client / store / coordinator），配置与自动发现在 `chatrans/src/app_config.rs`、`game_discovery.rs`。
+
+## 许可与来源
+
+MIT License（见 [LICENSE](LICENSE)）。本仓库 fork 自 [Yusux/Korabli-chatrans](https://github.com/Yusux/Korabli-chatrans)，解析能力基于 [wows-replays](https://github.com/lkolbly/wows-replays)，本项目在其上完成了 GUI 悬浮面板化改造（网页客户端移除、设置内嵌、双击启动、自动发现）。
