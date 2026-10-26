@@ -1,6 +1,6 @@
 [package]
 name = "chatrans"
-version = "0.2.0"
+version = "26.10.0"
 authors = ["Rorin <syusux@gmail.com>"]
 edition = "2021"
 publish = false
