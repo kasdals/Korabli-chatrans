@@ -3,11 +3,7 @@
     <p align="center">
         Korabli（战舰世界 / Lesta 客户端）战局聊天实时翻译悬浮面板
         <br />
-        <a href="README.md">简体中文</a>
-        ·
-        <a href="docs/README_CN.md">简体中文（备份）</a>
-        ·
-        <a href="https://github.com/Yusux/Korabli-chatrans">上游项目</a>
+        <b>简体中文</b> · <a href="#english">English</a> · <a href="https://github.com/Yusux/Korabli-chatrans">上游项目 / Upstream</a>
     </p>
 </div>
 
@@ -16,7 +12,7 @@
 在**对局进行中**实时读取游戏 `replays` 目录的 `temp.korablireplay` / `tempArenaInfo.json`，把战局聊天实时显示在一个**置顶悬浮面板**上，并可选接入 OpenAI / Anthropic 兼容的模型供应商（DeepSeek、通义等）做 LLM 翻译。
 
 - 双击 `chatrans.exe` 即可启动，**不会弹出黑色控制台窗口**
-- 首次运行自动发现游戏目录，**TomatoRadar 翻译插件的老配置自动迁移**（API key 无需重填）
+- 首次运行自动发现游戏目录
 - 面板默认锁定、点击穿透——**绝不抢游戏的鼠标点击与键盘焦点**
 - API key 经 Windows DPAPI 加密存储，不落明文、不进日志
 
@@ -65,10 +61,6 @@ cargo build --release --features gui
 | `后台管线未运行` | 监听线程未启动或已退出，重启程序可恢复 |
 | `连不上：<原因>` | 模型供应商请求失败（查 API key、Base URL、网络/代理）；恢复后自动回到正常态 |
 
-## 从 TomatoRadar 翻译插件迁移（老用户）
-
-无需任何操作。首次启动检测到 `%LOCALAPPDATA%\TomatoRadar\Addons\Translation` 下的旧配置（`translation.json` / `secrets.dat`）会自动迁移到本程序，**API key 原样继承，不用重填**。原插件目录不会被修改。
-
 ## 配置文件
 
 全部位于 `%LOCALAPPDATA%\KorabliOne\`：
@@ -76,12 +68,12 @@ cargo build --release --features gui
 | 文件 | 内容 |
 | --- | --- |
 | `app.json` | 游戏目录等本机配置 |
-| `translation.json` | 模型供应商配置（TomatoRadar 插件 schema 的超集，字段名仍为 `Endpoint*`） |
+| `translation.json` | 模型供应商配置（字段名沿用 `Endpoint*`） |
 | `secrets.dat` | API 密钥，DPAPI 加密，永不落明文 |
 | `placement.json` | 面板位置 / 尺寸 / 锁定状态 / 透明度（自动修正越界与脏值） |
 | `logs\chatrans.log` | 运行日志（单文件 2MB 上限，超出滚动为 `.log.1`） |
 
-> **用词说明**：界面上叫「模型供应商」，配置字段叫 `Endpoint` —— 后者是 TomatoRadar 插件的既有 schema，为兼容老配置不改名，两者是同一个东西。
+> **用词说明**：界面上叫「模型供应商」，配置字段叫 `Endpoint` —— 两者是同一个东西。
 
 ## 控制台模式（可选）
 
@@ -128,3 +120,124 @@ GUI 相关代码在 `chatrans/src/gui/`（面板/交互/设置视图），翻译
 ## 许可与来源
 
 MIT License（见 [LICENSE](LICENSE)）。本仓库 fork 自 [Yusux/Korabli-chatrans](https://github.com/Yusux/Korabli-chatrans)，解析能力基于 [wows-replays](https://github.com/lkolbly/wows-replays)，本项目在其上完成了 GUI 悬浮面板化改造（网页客户端移除、设置内嵌、双击启动、自动发现）。
+
+---
+
+<a id="english"></a>
+<div align="center">
+    <h2 align="center">English</h2>
+</div>
+
+## What is this
+
+Reads `temp.korablireplay` / `tempArenaInfo.json` from the game's `replays` folder **during a live battle** and shows chat messages on an **always-on-top overlay panel**, with optional LLM translation via OpenAI / Anthropic compatible providers (DeepSeek, Qwen, etc.).
+
+- Double-click `chatrans.exe` to launch — **no console window pops up**
+- Auto-discovers the game directory on first run
+- The panel starts locked and click-through — **never steals mouse clicks or keyboard focus from the game**
+- API keys are stored encrypted with Windows DPAPI; never written in plain text or logs
+
+## Quick start
+
+No prebuilt binaries in this repository yet — build it yourself:
+
+``` sh
+git clone https://github.com/kasdals/Korabli-chatrans.git
+cd Korabli-chatrans
+cargo build --release --features gui
+```
+
+The executable lands in `target\release\chatrans.exe`. Building without `--features gui` yields a console-only binary.
+
+> **Parsing broken after a game update?** `addons/scripts` contains entity definitions unpacked from the game and may go stale after major patches. Grab the latest from [Korabli-scripts](https://github.com/Yusux/Korabli-scripts), overwrite `addons/scripts`, and rebuild.
+
+## First-time setup (3 steps)
+
+Double-click `chatrans.exe`; the settings view opens automatically on first run:
+
+1. **Game directory** — auto-discovered via "Windows registry → common install paths" (e.g. `E:\Game\Korabli`); if that fails, click **浏览…** (Browse) and pick the game root folder (the one containing the `replays` folder). A green ✓ appears when valid. The `replays` subfolder is derived and created automatically.
+2. **Model provider** (required for translation) — fill in ID, name, API Base URL, API Key (masked by default; click the eye icon to verify). Click **获取模型列表** (Fetch models) to pull the model list from the provider; on failure you can type model ids manually. **添加更多** (Add more) supports multiple providers; the radio button picks the active one. Advanced settings: timeout seconds, proxy address (e.g. `http://127.0.0.1:7890`), custom headers.
+3. **保存配置** (Save) — when the path is valid the panel starts listening immediately; chat appears in battle.
+
+Bottom of the settings view: target language (Chinese by default), channel scope (team channel only / all), translation-only mode (hide original lines), panel opacity (40%–100%, live preview).
+
+## Panel usage
+
+Top bar icons (right → left): **Close · Pin on top · Clear · Settings (gear) · Lock**.
+
+| Action | Behavior |
+| --- | --- |
+| Locked (default) | Whole window is click-through; the game is never disturbed. Hover the top bar for **150 ms** to temporarily take over and click icons. The locked state is remembered across restarts |
+| Unlocked | Drag the title bar to move; drag edges to resize (opposite edge stays pinned); position/size persist across restarts |
+| Settings open | Clickable even when locked; while open the whole window is interactive (typing works), locking semantics resume the moment you close it |
+| Pin on top | Toggle always-on-top |
+| Clear | Clear the message list |
+
+**Status line** (bottom of the panel):
+
+| Display | Meaning |
+| --- | --- |
+| `已连接 · 本局 N 条 · 已译 M 条` | Working normally |
+| `未配置游戏路径 · 点这里打开设置` | Game path not configured (click-through when locked; use the gear to open settings) |
+| `后台管线未运行` | Watcher thread not started or dead — restart the app |
+| `连不上：<原因>` | Provider request failed (check API key, Base URL, network/proxy); returns to normal automatically |
+
+## Configuration files
+
+Everything lives in `%LOCALAPPDATA%\KorabliOne\`:
+
+| File | Content |
+| --- | --- |
+| `app.json` | Local machine config (game directory, etc.) |
+| `translation.json` | Model provider config (fields still named `Endpoint*`) |
+| `secrets.dat` | API keys, DPAPI-encrypted, never in plain text |
+| `placement.json` | Panel position / size / locked state / opacity (out-of-bounds and corrupt values auto-repaired) |
+| `logs\chatrans.log` | Runtime log (2 MB per file, rolls over to `.log.1`) |
+
+> **Naming note**: the UI says "模型供应商" (model provider) while config fields say `Endpoint` — they are the same thing.
+
+## Console mode (optional)
+
+``` powershell
+.\chatrans.exe -r 'D:\Game\Korabli\replays'
+```
+
+Prints **original** chat lines to the terminal (`── 新对局开始：×× ──` / `[友] …` / `[敌] …`). Console mode does **no translation** — translation lives in the GUI panel. `--headless` on a GUI build behaves the same.
+
+Launch rules: **double-click (no args)** = pure GUI, no console attached, logs to `logs\chatrans.log`; **with args** = attaches to the current terminal so output is visible.
+
+``` text
+Usage: chatrans.exe [OPTIONS] --replay-dir <REPLAY_DIR>
+
+Options:
+  -r, --replay-dir <REPLAY_DIR>        The replay dir to use
+  -t, --target-language <LANG>         Target language, zh/en. Default: zh
+      --access-key-id <ID>             Aliyun access key id (built-in interpreter)
+      --access-key-secret <SECRET>     Aliyun access key secret
+      --headless                       Run without the overlay panel (console mode)
+  -h, --help                           Print help
+  -V, --version                        Print version
+```
+
+## Known limitations
+
+- Auto-discovery covers some install methods only (registry + common drive paths); **manual browse** always works as a fallback
+- On some systems the panel's bottom edge may slide into the taskbar area (environment-specific Windows work-area API failure)
+- Multi-monitor layouts are not adapted
+- Translation latency depends on the provider (measured ~1–3 s per line on DeepSeek)
+- Closing the panel = exiting the program (there is no host window; the panel is the app)
+
+## Development
+
+``` sh
+cargo test                        # console-build tests
+cargo test --features gui         # full test suite incl. GUI
+cargo build --release             # console build
+cargo build --release --features gui   # GUI build
+```
+
+GUI code lives in `chatrans/src/gui/` (panel / interaction / settings view), the translation pipeline in `chatrans/src/translate/` (client / store / coordinator), config and auto-discovery in `chatrans/src/app_config.rs` and `game_discovery.rs`.
+
+## License & credits
+
+MIT License (see [LICENSE](LICENSE)). This repository is a fork of [Yusux/Korabli-chatrans](https://github.com/Yusux/Korabli-chatrans); parsing is based on [wows-replays](https://github.com/lkolbly/wows-replays). This fork replaces the web client with a native GUI overlay panel (in-panel settings, double-click launch, game directory auto-discovery).
