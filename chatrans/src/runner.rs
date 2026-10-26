@@ -28,7 +28,7 @@ use crate::processor::LiveEvent;
 #[command(
     name="Chatrans",
     author="Yusux",
-    version=concat!("v", option_env!("APP_VERSION").unwrap_or(env!("CARGO_PKG_VERSION"))),
+    version=option_env!("APP_VERSION").unwrap_or(concat!("v", env!("CARGO_PKG_VERSION"))),
     about="Translates chat from Korabli via the replay file",
     long_about=None,
     next_line_help = true,

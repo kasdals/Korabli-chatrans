@@ -48,7 +48,7 @@ jobs:
           else
             ver="$cal"
           fi
-          echo "APP_VERSION=$ver" >> "$GITHUB_ENV"
+          echo "APP_VERSION=v$ver" >> "$GITHUB_ENV"
           echo "PKGVER=$ver" >> "$GITHUB_ENV"
           echo "version: $ver"
 
