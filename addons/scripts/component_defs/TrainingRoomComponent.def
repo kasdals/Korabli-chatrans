@@ -191,6 +191,16 @@
 			<Exposed/>
 		</applyChanges>
 
+		<onBattleSessionCreate>
+			<Args>
+				<battleSession> MAILBOX </battleSession>
+				<playerDef> PLAYER_DEF </playerDef>
+			</Args>
+			<ReturnValues>
+				<resultCode> BOOL </resultCode>
+			</ReturnValues>
+		</onBattleSessionCreate>
+
 		<sendMessageToPlayers>
 			<Args>
 				<message> STRING </message>

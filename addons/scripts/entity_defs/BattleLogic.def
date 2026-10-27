@@ -125,7 +125,6 @@
             <Args>
                 <resurrectSpawnTag>STRING</resurrectSpawnTag>
                 <resurrectShipId>SHIP_ID</resurrectShipId>
-                <permoflageId>GAMEPARAMS_ID</permoflageId>
             </Args>
             <Exposed></Exposed>
         </receiveResurrectData>

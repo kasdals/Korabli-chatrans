@@ -68,21 +68,6 @@
         <onTotalUsersCountUpdate>
             <Arg>PYTHON</Arg>
         </onTotalUsersCountUpdate>
-        <onGameRoomStateInit>
-            <Args>
-                <teamBuildType>INT8</teamBuildType>
-                <mapID>INT16</mapID>
-                <battleType>UINT16</battleType>
-                <duration>UINT16</duration>
-                <gameMode>GAME_MODE</gameMode>
-                <gameParamID>GAMEPARAMS_ID</gameParamID>
-                <isFogOfWar>BOOL</isFogOfWar>
-                <teamNames>ARRAY
-                    <of>UNICODE_STRING</of>
-                </teamNames>
-                <isViewShipInfoDisabled>BOOL</isViewShipInfoDisabled>
-            </Args>
-        </onGameRoomStateInit>
         <inviteToPreBattle>
             <Arg>PRE_BATTLE_INVITE_DEF</Arg>
         </inviteToPreBattle>
@@ -151,10 +136,6 @@
                 <isLocked>BOOL</isLocked>
             </Args>
         </receiveLockData>
-        <leaveBattleSession>
-            <Arg>UINT8</Arg>
-            <Arg>BLOB</Arg>
-        </leaveBattleSession>
         <onActionFailed>
             <Arg>INT16</Arg>
             <Arg>INT16</Arg>
@@ -170,7 +151,6 @@
                 <packedInfo>BLOB</packedInfo>
             </Args>
         </onDisconnectedFromServer>
-        <onPrepareingForBattle></onPrepareingForBattle>
         <receiveLGIToken>
             <Args>
                 <spaID>DB_ID</spaID>
@@ -186,7 +166,7 @@
         <setTrace>
             <Arg>BOOL</Arg>
         </setTrace>
-        <curVersion_26_9_0_8863954></curVersion_26_9_0_8863954>
+        <curVersion_26_11_8870015></curVersion_26_11_8870015>
         <updateSSEProgress>
             <Arg>BLOB</Arg>
             <VariableLengthHeaderSize>
@@ -233,11 +213,12 @@
             <Arg>UINT32</Arg>
             <Arg>MSGPACK_BLOB</Arg>
         </receiveTransactionState>
-        <onChangeShutdown>
-            <Arg>BOOL</Arg>
-            <Arg>UINT8</Arg>
-            <Arg>UINT32</Arg>
-        </onChangeShutdown>
+        <onServerShutdown>
+            <Args>
+                <countBattles>UINT8</countBattles>
+                <lastBattleFinishTime>TIMESTAMP</lastBattleFinishTime>
+            </Args>
+        </onServerShutdown>
         <transactionLockEnd></transactionLockEnd>
         <receiveNotification>
             <Arg>BLOB</Arg>
@@ -329,7 +310,6 @@
         </onChangeAccountLevelingState>
         <onSnowflakesPremiumChanged></onSnowflakesPremiumChanged>
     </ClientMethods>
-    <CellMethods></CellMethods>
     <BaseMethods>
         <getAccountData>
             <Arg>UINT32</Arg>

@@ -1,6 +1,5 @@
 <root>
 	<BaseMethods>
-
 		<onKicked>
 			<Args>
 				<reason> UINT8 </reason>
@@ -9,12 +8,12 @@
 
 		<onBattleSessionCreate>
 			<Args>
+				<battleSession> MAILBOX </battleSession>
 				<battleInfo> PYTHON </battleInfo>
 			</Args>
 			<ReturnValues>
 				<resultCode> BOOL </resultCode>
 			</ReturnValues>
 		</onBattleSessionCreate>
-
 	</BaseMethods>
 </root>

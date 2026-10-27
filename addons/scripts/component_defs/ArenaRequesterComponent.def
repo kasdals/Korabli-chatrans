@@ -19,6 +19,12 @@
 				<pickledKickInfo> BLOB </pickledKickInfo>
 			</Args>
 		</onPlayerKicked>
+
+		<waitForArena>
+			<ReturnValues>
+				<resultCode> BOOL </resultCode>
+			</ReturnValues>
+		</waitForArena>
 	</BaseMethods>
 
 	<ofEntity>

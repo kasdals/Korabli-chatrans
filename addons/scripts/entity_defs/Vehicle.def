@@ -211,6 +211,11 @@
             <Flags>ALL_CLIENTS</Flags>
             <Default>0</Default>
         </underMissileThreat>
+        <initialShipId>
+            <Type>SHIP_ID</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>0</Default>
+        </initialShipId>
     </Properties>
     <ClientMethods>
         <onAvatarReady></onAvatarReady>

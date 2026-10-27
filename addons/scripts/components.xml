@@ -64,4 +64,6 @@
 	<SagasComponent/>
 	<ExteriorDecalComponent/>
 	<LukomoryeComponent/>
+	<BattleSessionMemberComponent/>
+	<AlbumEventComponent/>
 </root>

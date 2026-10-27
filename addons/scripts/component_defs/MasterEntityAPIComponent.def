@@ -56,7 +56,7 @@
 		<createBattleSessionEntity>
 			<Args>
 				<clusterID> CLUSTER_ID </clusterID>
-				<entityParams> CREATE_BATTLE_SESSION_PARAMS </entityParams>
+				<initialDef> BATTLE_SESSION_INITIAL_DEF </initialDef>
 			</Args>
 			<ReturnValues>
 				<entityMailbox> MAILBOX </entityMailbox>

@@ -347,24 +347,6 @@
 		ARRAY <of> PLAYER_DEF </of>
 	</PLAYERS_DEFS>
 
-	<BATTLE_SESSION_TEAM_INFO>
-		FIXED_DICT
-		<Properties>
-			<teamID><Type> TEAM_ID </Type></teamID>
-			<playersDefs><Type> PLAYERS_DEFS </Type></playersDefs>
-		</Properties>
-		<implementedBy> ServerCommonDefs.BattleSessionTeamInfo.battleSessionTeamInfoConverter </implementedBy>
-	</BATTLE_SESSION_TEAM_INFO>
-
-	<PRE_BATTLE_CREATOR_DEF>
-		FIXED_DICT
-		<Properties>
-			<id><Type>DB_ID</Type></id>
-			<info><Type>PYTHON</Type></info>
-		</Properties>
-		<AllowNone> true </AllowNone>
-	</PRE_BATTLE_CREATOR_DEF>
-
 	<PRE_BATTLE_SENDER_DEF>
 		FIXED_DICT
 		<Properties>
@@ -384,14 +366,12 @@
 	<PRE_BATTLE_INVITE_DEF>
 		FIXED_DICT
 		<Properties>
-			<preBattleId><Type>OBJECT_ID</Type></preBattleId>
-			<preBattleType><Type>INT8</Type></preBattleType>
-			<inviteType><Type>INT8</Type></inviteType>
-			<expirationTime><Type>UINT32</Type></expirationTime>
-			<creatorInfo><Type>PRE_BATTLE_CREATOR_DEF</Type></creatorInfo>
-			<senderInfo><Type>PRE_BATTLE_SENDER_DEF</Type></senderInfo>
-			<state><Type>STRING</Type></state>
-			<!--comment><Type>UNICODE_STRING</Type></comment-->
+			<preBattleId><Type> OBJECT_ID </Type></preBattleId>
+			<preBattleType><Type> INT8 </Type></preBattleType>
+			<inviteType><Type> INT8 </Type></inviteType>
+			<expirationTime><Type> UINT32 </Type></expirationTime>
+			<senderInfo><Type> PRE_BATTLE_SENDER_DEF </Type></senderInfo>
+			<state><Type> STRING </Type></state>
 		</Properties>
 	</PRE_BATTLE_INVITE_DEF>
 
@@ -1971,12 +1951,12 @@
 	<ENQUEUE_REQUEST>
 		FIXED_DICT
 		<Properties>
-			<realm><Type>STRING</Type></realm>
-			<queueType><Type>QUEUE_TYPE</Type></queueType>
-			<proxy><Type>MAILBOX</Type></proxy>	<!-- mailbox: an account or a division -->
-			<playersDefs><Type>PLAYERS_DEFS</Type></playersDefs>
-			<proxyInfo><Type>PRE_BATTLE_CREATOR_DEF</Type></proxyInfo>	<!-- None if it is not a division -->
-			<operationID><Type>GAMEPARAMS_ID</Type></operationID>
+			<realm><Type> STRING </Type></realm>
+			<queueType><Type> QUEUE_TYPE </Type></queueType>
+			<proxy><Type> MAILBOX </Type></proxy>
+			<playersDefs><Type> PLAYERS_DEFS </Type></playersDefs>
+			<clanEnqueueData><Type> PYTHON </Type></clanEnqueueData>
+			<operationID><Type> GAMEPARAMS_ID </Type></operationID>
 		</Properties>
 		<implementedBy>EnqueueProcess.DataTypes.EnqueueRequestConverter</implementedBy>
 	</ENQUEUE_REQUEST>
@@ -2232,13 +2212,6 @@
 		</Properties>
 	</MINE_INFO>
 
-	<CREATE_BATTLE_SESSION_PARAMS>
-		FIXED_DICT
-		<Properties>
-			<_battleDef><Type> BATTLE_DEF </Type></_battleDef>
-		</Properties>
-	</CREATE_BATTLE_SESSION_PARAMS>
-
 	<CREATE_PRE_BATTLE_PARAMS>
 		FIXED_DICT
 		<Properties>
@@ -2282,6 +2255,47 @@
 		</Properties>
 		<implementedBy> ServerCommonDefs.BaseAppAgentMapInfo.baseAppAgentMapInfoConverter </implementedBy>
 	</BASEAPP_AGENT_MAP_INFO>
+
+	<BATTLE_SESSION_PARTICIPANT_DEF>
+		FIXED_DICT
+		<Properties>
+			<playerID><Type> PLAYER_ID </Type></playerID>
+			<teamID><Type> TEAM_ID </Type></teamID>
+		</Properties>
+		<implementedBy> battlesessionutils.defs.participantDefConverter </implementedBy>
+	</BATTLE_SESSION_PARTICIPANT_DEF>
+
+	<BATTLE_SESSION_BOT_DEF>
+		FIXED_DICT
+		<Properties>
+			<playerDef><Type> PLAYER_DEF </Type></playerDef>
+			<teamID><Type> TEAM_ID </Type></teamID>
+		</Properties>
+		<implementedBy> battlesessionutils.defs.botDefConverter </implementedBy>
+	</BATTLE_SESSION_BOT_DEF>
+
+	<BATTLE_SESSION_INITIAL_DEF>
+		FIXED_DICT
+		<Properties>
+			<battleDef><Type> BATTLE_DEF </Type></battleDef>
+			<participantsDefs><Type> ARRAY <of> BATTLE_SESSION_PARTICIPANT_DEF </of> </Type></participantsDefs>
+			<botsDefs><Type> ARRAY <of> BATTLE_SESSION_BOT_DEF </of> </Type></botsDefs>
+			<clanEnqueueDataByTeamID><Type> PYTHON </Type></clanEnqueueDataByTeamID>
+		</Properties>
+		<implementedBy> battlesessionutils.defs.initialDefConverter </implementedBy>
+	</BATTLE_SESSION_INITIAL_DEF>
+
+	<BATTLE_SESSION_BACKUP_DATA_DEF>
+		FIXED_DICT
+		<Properties>
+			<sessionMBox><Type> MAILBOX </Type></sessionMBox>
+			<battleDef><Type> BATTLE_DEF </Type></battleDef>
+			<arenaUniqueID><Type> INT64 </Type></arenaUniqueID>
+			<arenaClusterID><Type> INT32 </Type></arenaClusterID>
+			<prognosedFinishTime><Type> TIMESTAMP </Type></prognosedFinishTime>
+		</Properties>
+		<implementedBy> battlesessionutils.defs.backupDataConverter </implementedBy>
+	</BATTLE_SESSION_BACKUP_DATA_DEF>
 
 	<TOURNAMENT_ROOM_TEAM_DEF>
 		FIXED_DICT

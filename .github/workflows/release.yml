@@ -26,31 +26,28 @@ jobs:
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
 
-      # Version scheme: tag is the single source of truth (e.g. v26.10).
-      # The tag (minus leading v) is injected into the exe as APP_VERSION.
-      # Sanity check only: warn when the tag's YY.M differs from the build
-      # date's calendar version (26.10 -> 26.11 -> 27.1 flips year automatically).
-      # Manual runs (no tag) fall back to the build-date calendar version.
-      - name: Resolve version from tag
+      # 版本号表示「适配的游戏版本」（如 26.11），不跟构建月份走。
+      # 游戏版本是外部给定的，没法按日历自动推算，所以单一来源是：
+      #   - 打了 tag（v26.11 或 v26.11.1）→ 以 tag 为准
+      #   - 手动触发 → 读 chatrans/Cargo.toml 里 [package] 的 version
+      # 提前适配下个版本（10 月发 26.11）是正常操作，不再做日历比对告警。
+      - name: Resolve version
         shell: bash
         run: |
-          cal="$(printf '%d.%d.0' "$((10#$(date +%y)))" "$((10#$(date +%m)))")"
           if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
             ver="${GITHUB_REF#refs/tags/v}"
-            case "$ver" in
-              *.*) ;;                     # already has a patch segment
-              *) ver="$ver.0" ;;
-            esac
-            tagYYMM="$(printf '%d.%d' "$((10#$(echo "$ver" | cut -d. -f1)))" "$((10#$(echo "$ver" | cut -d. -f2)))")"
-            if [ "$tagYYMM" != "${cal%.*}" ]; then
-              echo "::warning::tag version $tagYYMM differs from build-date calendar version ${cal%.*} - tag wins"
-            fi
+            src="tag $GITHUB_REF"
           else
-            ver="$cal"
+            ver="$(awk '/^\[package\]/{f=1;next} /^\[/{f=0} f && /^version *=/{gsub(/[^0-9.]/,"");print;exit}' chatrans/Cargo.toml)"
+            src="chatrans/Cargo.toml"
           fi
+          case "$ver" in
+            *.*.*) ;;
+            *) ver="$ver.0" ;;
+          esac
           echo "APP_VERSION=v$ver" >> "$GITHUB_ENV"
           echo "PKGVER=$ver" >> "$GITHUB_ENV"
-          echo "version: $ver"
+          echo "version: $ver (from $src)"
 
       - name: Build GUI panel (cargo build --release -p chatrans --features gui)
         run: cargo build --release -p chatrans --features gui

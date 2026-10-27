@@ -48,13 +48,15 @@
 			<Exposed/>
 		</leave>
 
-		<onEnterViaDivision>  <!-- Callback from Division -->
+		<onEnterMatchmaker>
 			<Args>
 				<enqueueData> ENQUEUE_DATA </enqueueData>
+				<playerDef> PLAYER_DEF </playerDef>
+				<viaDivision> BOOL </viaDivision>
 			</Args>
-		</onEnterViaDivision>
+		</onEnterMatchmaker>
 
-		<onLeave>  <!-- Callback from Division -->
+		<onLeave>
 			<Args>
 				<reason> UINT8 </reason>
 			</Args>

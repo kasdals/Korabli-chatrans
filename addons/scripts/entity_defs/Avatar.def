@@ -651,7 +651,7 @@
             <Args>
                 <arenaUniqueId>INT64</arenaUniqueId>
                 <teamBuildTypeId>TEAM_BUILD_TYPE</teamBuildTypeId>
-                <preBattlesInfo>BLOB</preBattlesInfo>
+                <clanEnqueueDataByTeamID>BLOB</clanEnqueueDataByTeamID>
                 <playersStates>BLOB</playersStates>
                 <botsStates>BLOB</botsStates>
                 <observersState>BLOB</observersState>

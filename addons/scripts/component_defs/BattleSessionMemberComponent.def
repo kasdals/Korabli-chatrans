@@ -1,0 +1,94 @@
+<root>
+
+	<Properties>
+		<_BattleSessionMemberComponent__sessionMBox>
+			<Type> MAILBOX </Type>
+			<Flags> BASE </Flags>
+		</_BattleSessionMemberComponent__sessionMBox>
+
+		<_BattleSessionMemberComponent__sessionsDataCollection>
+			<Type> ARRAY <of> BATTLE_SESSION_BACKUP_DATA_DEF </of> </Type>
+			<Flags> BASE </Flags>
+		</_BattleSessionMemberComponent__sessionsDataCollection>
+	</Properties>
+
+	<BaseMethods>
+		<becomeMember>
+			<Args>
+				<battleSession> MAILBOX </battleSession>
+			</Args>
+			<ReturnValues>
+				<playerDef> PLAYER_DEF </playerDef>
+			</ReturnValues>
+		</becomeMember>
+
+		<onEnterBattleSession>
+			<Args>
+				<sessionID> ENTITY_ID </sessionID>
+				<battleDef> BATTLE_DEF </battleDef>
+			</Args>
+		</onEnterBattleSession>
+
+		<onBattlePrepare>
+			<Args>
+				<sessionID> ENTITY_ID </sessionID>
+				<arenaUniqueID> INT64 </arenaUniqueID>
+				<arenaClusterID> INT32 </arenaClusterID>
+				<mapID> INT16 </mapID>
+				<gameMode> GAME_MODE </gameMode>
+			</Args>
+		</onBattlePrepare>
+
+		<onLeaveBattle>
+			<Args>
+				<leavedSessionID> ENTITY_ID </leavedSessionID>
+				<playerArenaInfo> PYTHON </playerArenaInfo>
+			</Args>
+		</onLeaveBattle>
+
+		<onBattleEnd>
+			<Args>
+				<sessionID> ENTITY_ID </sessionID>
+				<leaveReason> UINT8 </leaveReason>
+				<playerArenaInfo> PYTHON </playerArenaInfo>
+				<compressedResults> BLOB </compressedResults>
+			</Args>
+		</onBattleEnd>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onEnterBattleSession/>
+
+		<onBattlePrepare>
+			<Args>
+				<teamBuildType> TEAM_BUILD_TYPE </teamBuildType>
+				<mapID> INT16 </mapID>
+				<battleType> UINT16 </battleType>
+				<duration> UINT16 </duration>
+				<gameMode> GAME_MODE </gameMode>
+				<gameParamID> GAMEPARAMS_ID </gameParamID>
+				<isFogOfWar> BOOL </isFogOfWar>
+				<teamNames> ARRAY <of> UNICODE_STRING </of> </teamNames>
+				<isViewShipInfoDisabled> BOOL </isViewShipInfoDisabled>
+			</Args>
+		</onBattlePrepare>
+
+		<onLeaveBattle>
+			<Args>
+				<leaveReason> UINT8 </leaveReason>
+				<surveyInfo> MSGPACK_BLOB </surveyInfo>
+			</Args>
+		</onLeaveBattle>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+
+	<ofBWComponent>
+		<base/>
+		<bot/>
+		<client/>
+	</ofBWComponent>
+
+</root>

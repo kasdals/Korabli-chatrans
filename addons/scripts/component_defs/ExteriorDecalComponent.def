@@ -1,6 +1,6 @@
 <root>
 	<BaseMethods>
-		<requestShipMetrics>
+		<getShipMetrics>
 			<Args>
 				<shipID> SHIP_ID </shipID>
 			</Args>
@@ -8,7 +8,7 @@
 				<stats> MSGPACK_BLOB </stats>
 			</ReturnValues>
 			<Exposed/>
-		</requestShipMetrics>
+		</getShipMetrics>
 	</BaseMethods>
 
 	<ClientMethods>

@@ -24,10 +24,12 @@
         <onCheckGamePing>
             <Arg>UINT64</Arg>
         </onCheckGamePing>
-        <onChangeShutdown>
-            <Arg>UINT8</Arg>
-            <Arg>UINT32</Arg>
-        </onChangeShutdown>
+        <onServerShutdown>
+            <Args>
+                <countBattles>UINT8</countBattles>
+                <lastBattleFinishTime>TIMESTAMP</lastBattleFinishTime>
+            </Args>
+        </onServerShutdown>
     </ClientMethods>
     <BaseMethods>
         <checkGamePing>
