@@ -120,3 +120,5 @@ GUI 相关代码在 `chatrans/src/gui/`（面板/交互/设置视图），翻译
 ## 许可与来源
 
 MIT License（见 [LICENSE](LICENSE)）。本仓库 fork 自 [Yusux/Korabli-chatrans](https://github.com/Yusux/Korabli-chatrans)，解析能力基于 [wows-replays](https://github.com/lkolbly/wows-replays)，本项目在其上完成了 GUI 悬浮面板化改造（网页客户端移除、设置内嵌、双击启动、自动发现）。
+
+**舰船中文名**来自 [DDFantasyV/Korabli_localization_chs](https://github.com/DDFantasyV/Korabli_localization_chs)（Lesta 服简体中文汉化包，Apache-2.0）。从其中的 `global.mo` 按 26.11 版本提取 `IDS_<index>_FULL`，生成 `chatrans/ship_names.tsv` 与 `chatrans/ship_ids.tsv`；只引用舰船名称字段，汉化包的其他内容（字体、界面文本等）未引入本仓库。

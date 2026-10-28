@@ -120,3 +120,5 @@ GUI code lives in `chatrans/src/gui/` (panel / interaction / settings view), the
 ## License & credits
 
 MIT License (see [LICENSE](LICENSE)). This repository is a fork of [Yusux/Korabli-chatrans](https://github.com/Yusux/Korabli-chatrans); parsing is based on [wows-replays](https://github.com/lkolbly/wows-replays). This fork replaces the web client with a native GUI overlay panel (in-panel settings, double-click launch, game directory auto-discovery).
+
+**Chinese ship names** come from [DDFantasyV/Korabli_localization_chs](https://github.com/DDFantasyV/Korabli_localization_chs), a Simplified Chinese localization mod for the Lesta client (Apache-2.0). Names are extracted from its `global.mo` for game version 26.11 (`IDS_<index>_FULL`) into `chatrans/ship_names.tsv` and `chatrans/ship_ids.tsv`. Only the ship-name entries are used; nothing else from the mod (fonts, UI strings) is bundled here.
