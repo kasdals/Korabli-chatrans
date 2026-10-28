@@ -88,25 +88,38 @@ for k, v in mo.items():
     if not m:
         continue
     name = SUFFIX.sub('', v.decode('utf-8', 'replace')).strip()
-    if name:
+    # "Disabled: 矶风" 这类是未实装船的占位名，不要写进表里
+    if name and not name.startswith('Disabled:'):
         ships[m.group(1)] = name
 
-# 1) 更新 id -> name：凡是能通过 index 找到新名字的，一律采用
+# 1) 更新 id -> name：凡是能通过 index 找到新名字的，一律采用；表里没有的 id 直接追加
 updated = 0
+added = 0
 new_id_rows = []
+id_pos = {}
 for sid, old_name in id_rows:
+    id_pos[sid] = len(new_id_rows)
     new_id_rows.append((sid, old_name))
-index_to_id = {idx: sid for idx, sid in index_rows}
-id_pos = {sid: i for i, (sid, _) in enumerate(new_id_rows)}
+
 for idx, sid in index_rows:
-    if idx in ships and sid in id_pos and new_id_rows[id_pos[sid]][1] != ships[idx]:
-        new_id_rows[id_pos[sid]] = (sid, ships[idx])
-        updated += 1
+    if idx not in ships:
+        continue
+    name = ships[idx]
+    if sid in id_pos:
+        if new_id_rows[id_pos[sid]][1] != name:
+            new_id_rows[id_pos[sid]] = (sid, name)
+            updated += 1
+    else:
+        id_pos[sid] = len(new_id_rows)
+        new_id_rows.append((sid, name))
+        added += 1
 
 # 2) 生成 index -> name（全量，含没有数字 ID 的新船）
 name_rows = sorted(ships.items())
 
+index_to_id = {idx: sid for idx, sid in index_rows}
 print(f'id 表更新条目: {updated}')
+print(f'id 表新增条目: {added}')
 print(f'index 名字表条目: {len(name_rows)}')
 print(f'其中无数字 ID 的: {len([i for i, _ in name_rows if i not in index_to_id])}')
 

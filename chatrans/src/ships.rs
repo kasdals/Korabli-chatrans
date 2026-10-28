@@ -102,9 +102,9 @@ mod test {
     }
 
     #[test]
-    fn falls_back_to_english() {
-        // PWSC110_Konung —— 本地化表里没有中文名，保留英文
-        assert_eq!(display_name(4179539248), Some("Konung"));
+    fn localized_name_wins_over_english() {
+        // PWSC110_Konung —— 26.11 汉化包给出了中文名，不再是英文 Konung
+        assert_eq!(display_name(4179539248), Some("国王（瑞典）"));
     }
 
     #[test]
@@ -130,9 +130,8 @@ mod test {
     }
 
     #[test]
-    fn new_ship_without_numeric_id_shows_chinese() {
-        // PFSC211（拉罗谢尔）、PASB529（北达科他）是 26.11 的新船：
-        // ship_index.tsv 里还没有它们的数字 ID，只能靠 ship_names.tsv 命中
+    fn config_lookup_resolves_new_ships() {
+        // PFSC211（拉罗谢尔）、PASB529（北达科他）是 26.11 的新船
         assert_eq!(
             display_name_from_config("PFSC211-La_Rochelle"),
             Some("拉罗谢尔")
@@ -144,10 +143,16 @@ mod test {
     }
 
     #[test]
-    fn names_table_covers_ships_missing_from_index() {
-        // 这两条目前确实不在 index 表里 —— 如果哪天真补上了数字 ID，
-        // 这个断言会失败，提醒把 ship_names.tsv 的位置重新理一遍
-        assert!(names_table().contains_key("PFSC211"));
-        assert!(!index_table().contains_key("PFSC211"));
+    fn new_ships_have_numeric_ids() {
+        // 数字 ID 来自 26.11 客户端 res_unpack 的 Ship/*.json 顶层 id，
+        // 所以玩家列表里的 ShipParamsId 也能直接查到中文名
+        assert_eq!(
+            display_name(*index_table().get("PFSC211").unwrap()),
+            Some("拉罗谢尔")
+        );
+        assert_eq!(
+            display_name(*index_table().get("PASB529").unwrap()),
+            Some("北达科他")
+        );
     }
 }
